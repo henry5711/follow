@@ -55,7 +55,7 @@ dev_rollback_job:
     - docker stop devrubick2follow-api || true
     - docker rm devrubick2follow-api || true
     - docker image tag devrubick2follow-api:prev devrubick2follow-api:latest || true
-    - docker run -d --restart always --name devrubick2follow-api --network devapp -p 9028:80 -v devrubick2follow-api-images:/var/www/html/public/images -v devrubick2follo-api-images:/var/www/html/public/logos devrubick2follow-api
+    - docker run -d --restart always --name devrubick2follow-api --network devapp -p 9028:80 -v devrubick2follow-api-images:/var/www/html/public/images -v devrubick2follow-api-images:/var/www/html/public/logos devrubick2follow-api
   when: manual
   tags:
     - devapp
@@ -117,7 +117,7 @@ qa_rollback_job:
     - docker stop qarubick2follow-api || true
     - docker rm qarubick2follow-api || true
     - docker image tag qarubick2follow-api:prev qarubick2follow-api:latest || true
-    - docker run -d --restart always --name qarubick2follow-api --network qaapp -p 8124:80 -v qarubick2follow-api-images:/var/www/html/public/images -v qarubick2news-api-images:/var/www/html/public/logos qarubick2follow-api
+    - docker run -d --restart always --name qarubick2follow-api --network qaapp -p 8124:80 -v qarubick2follow-api-images:/var/www/html/public/images -v qarubick2follow-api-images:/var/www/html/public/logos qarubick2follow-api
   when: manual
   tags:
     - qarubick2

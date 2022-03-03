@@ -55,7 +55,51 @@ $router->group(['prefix' => 'api'], function (Router $router) {
 
 });
 
-    
+  /** routes para post **/ 
+ 
+$router->get('posts', 'post\postController@_index');
+$router->get('posts/{id}', 'post\postController@_show');
+$router->get('posts/usu/{id}', 'post\postController@postuser');
+$router->get('posts/index/user/{id}', 'post\postController@postseguidos');
+$router->post('posts', 'post\postController@_store');
+$router->put('posts/{id}', 'post\postController@_update');
+$router->delete('posts/{id}', 'post\postController@_delete');
+ 
+/** routes para comments **/ 
+ 
+$router->get('comments', 'comments\commentsController@_index');
+$router->get('comments/{id}', 'comments\commentsController@_show');
+$router->get('comments/post/{id}', 'comments\commentsController@compost');
+$router->post('comments', 'comments\commentsController@_store');
+$router->put('comments/{id}', 'comments\commentsController@_update');
+$router->delete('comments/{id}', 'comments\commentsController@_delete');
+ 
+/** routes para type_reaction **/ 
+ 
+$router->get('type_reactions', 'type_reaction\type_reactionController@_index');
+$router->get('type_reactions/{id}', 'type_reaction\type_reactionController@_show');
+$router->post('type_reactions', 'type_reaction\type_reactionController@_store');
+$router->put('type_reactions/{id}', 'type_reaction\type_reactionController@_update');
+$router->delete('type_reactions/{id}', 'type_reaction\type_reactionController@_delete');
+ 
+/** routes para reaction **/ 
+ 
+$router->get('reactions', 'reaction\reactionController@_index');
+$router->get('reactions/{id}', 'reaction\reactionController@_show');
+$router->get('reactions/post/{id}', 'reaction\reactionController@reacpost');
+$router->post('reactions', 'reaction\reactionController@_store');
+$router->put('reactions/{id}', 'reaction\reactionController@_update');
+$router->delete('reactions/{id}', 'reaction\reactionController@_delete'); 
+
+/** routes para seguidores **/ 
+ 
+$router->get('seguidores', 'seguidores\seguidoresController@_index');
+$router->get('seguidores/{id}', 'seguidores\seguidoresController@_show');
+$router->get('seguidores/usu/{id}', 'seguidores\seguidoresController@seguidos');
+$router->get('seguidos/profile/{id}', 'seguidores\seguidoresController@seguidores');
+$router->post('seguidores', 'seguidores\seguidoresController@_store');
+$router->put('seguidores/{id}', 'seguidores\seguidoresController@_update');
+$router->delete('seguidores/{id}', 'seguidores\seguidoresController@_destroy');
     
  
 
@@ -65,3 +109,7 @@ $router->group(['prefix' => 'api'], function (Router $router) {
  
  
  
+ 
+
+ 
+

@@ -25,7 +25,7 @@ class ImageService //extends TatucoService
     {
         try{
             $route = rtrim(app()->basePath('public/'), '/') . "/images/";
-            $route_web = env('CUSTOM_URL') . '/images/';
+            $route_web = env('APP_URL') ."/images/";
             $now = Carbon::now()->format('Y-m-d');
             $upload_dir =$route;
             $img = $images;

@@ -72,7 +72,7 @@ class ImageService //extends TatucoService
     {
         $extension="";
         if(!empty($string)){
-            $formats = ["jpg", "jpeg", "png", "gif",'icoñ..'];
+            $formats = ["jpg", "jpeg", "png", "gif",'mp4','icoñ..'];
             if(substr($string,0,4)=='http')
             {
                 return $extension=3;

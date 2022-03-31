@@ -12,7 +12,7 @@ use App\Traits\ApiResponse;
 use App\Traits\ManageRoles;
 use Illuminate\Http\Request;
 use Illuminate\Validation\UnauthorizedException;
-use Laravel\Lumen\Routing\Controller as BaseController;
+use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
@@ -78,7 +78,7 @@ class CrudController extends BaseController
     {
         return $this->service->_delete($id);
     }
-    
+
     public function parseMessageBag($messageBag){
         return array_merge(array_values($messageBag->getMessages()));
     }

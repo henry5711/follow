@@ -1,115 +1,80 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application $router->|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It is a breeze. Simply tell Lumen the URIs it should respond to
-| and give it the Closure to call when that URI is requested.
-|
-*/
-
+use App\Http\Controllers\post\postController;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Laravel\Lumen\Routing\Router;
+use Illuminate\Support\Facades\Route;
 
 /*
-* ALL THE METHODS WITH A _ BEFORE THOSE NAME GOES DIRECTLY TO REPOSITORY THROUGH TATUCO METHODS
-* TODOS LOS METODOS CON UN _ EN EL PREFIJO DEL NOMBRE VAN DIRECTAMENTE AL REPOSITORIO POR MEDIO DE LOS METODOS DE TATUCO
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| is assigned the "api" middleware group. Enjoy building your API!
+|
 */
 
-$router->group(['prefix' => 'api'], function (Router $router) {
-
-    $router->get('/', function () use ($router) {
-
-        return response()->json([
-            "version"=> $router->app->version(),
-            "time"   => Carbon::now()->toDateTime(),
-            "php"    =>  phpversion()
-        ]);
-    });
-    
-    /*
-     *routes with report prefix
-     * rutas con el prefijo report
-    */
-    $router->group(['prefix' => 'report'], function () use ($router) {
-        $router->post('/automatic', 'ReportController@automatic');
-
-    });
-    
-    $router->group(['middleware' => ['auth']],function () use ($router) {
-
-       
-   
-
-
-    $router->group(['middleware' => ['authorize']],function () use ($router) {
-
-        $router->group(['namespace' => '\Rap2hpoutre\LaravelLogViewer'], function() use ($router) {
-            $router->get('logs', 'LogViewerController@index');
-        });
-
-    });
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
 
 });
 
-  /** routes para post **/ 
- 
-$router->get('posts', 'post\postController@_index');
-$router->get('posts/{id}', 'post\postController@_show');
-$router->get('posts/usu/{id}', 'post\postController@postuser');
-$router->get('posts/index/user/{id}', 'post\postController@postseguidos');
-$router->post('posts', 'post\postController@_store');
-$router->put('posts/{id}', 'post\postController@_update');
-$router->delete('posts/{id}', 'post\postController@_delete');
- 
-/** routes para comments **/ 
- 
-$router->get('comments', 'comments\commentsController@_index');
-$router->get('comments/{id}', 'comments\commentsController@_show');
-$router->get('comments/post/{id}', 'comments\commentsController@compost');
-$router->post('comments', 'comments\commentsController@_store');
-$router->put('comments/{id}', 'comments\commentsController@_update');
-$router->delete('comments/{id}', 'comments\commentsController@_delete');
- 
-/** routes para type_reaction **/ 
- 
-$router->get('type_reactions', 'type_reaction\type_reactionController@_index');
-$router->get('type_reactions/{id}', 'type_reaction\type_reactionController@_show');
-$router->post('type_reactions', 'type_reaction\type_reactionController@_store');
-$router->put('type_reactions/{id}', 'type_reaction\type_reactionController@_update');
-$router->delete('type_reactions/{id}', 'type_reaction\type_reactionController@_delete');
- 
-/** routes para reaction **/ 
- 
-$router->get('reactions', 'reaction\reactionController@_index');
-$router->get('reactions/{id}', 'reaction\reactionController@_show');
-$router->get('reactions/post/{id}', 'reaction\reactionController@reacpost');
-$router->post('reactions', 'reaction\reactionController@_store');
-$router->put('reactions/{id}', 'reaction\reactionController@_update');
-$router->delete('reactions/{id}', 'reaction\reactionController@_delete'); 
 
-/** routes para seguidores **/ 
- 
-$router->get('seguidores', 'seguidores\seguidoresController@_index');
-$router->get('seguidores/{id}', 'seguidores\seguidoresController@_show');
-$router->get('seguidores/usu/{id}', 'seguidores\seguidoresController@seguidos');
-$router->get('seguidos/profile/{id}', 'seguidores\seguidoresController@seguidores');
-$router->post('seguidores', 'seguidores\seguidoresController@_store');
-$router->put('seguidores/{id}', 'seguidores\seguidoresController@_update');
-$router->delete('seguidores/{id}', 'seguidores\seguidoresController@_destroy');
-    
- 
+Route::get('/', function () {
 
-    
+    return response()->json([
+        //"version" => Route::app->version(),
+        "time"   => Carbon::now()->toDateTime(),
+        "php"    =>  phpversion()
+    ]);
 });
 
- 
- 
- 
- 
 
- 
+/** routes para post **/
+
+Route::get('posts', [postController::class,'_index']);
+Route::get('posts/{id}', [postController::class,'_show']);
+Route::get('posts/usu/{id}', [postController::class,'postuser']);
+Route::get('posts/index/user/{id}', [postController::class,'postseguidos']);
+Route::post('posts', [postController::class,'_store']);
+Route::put('posts/{id}', [postController::class,'_update']);
+Route::delete('posts/{id}', [postController::class,'_delete']);
+
+/** routes para comments **/
+
+Route::get('comments', [commentsController::class,'_index']);
+Route::get('comments/{id}', [commentsController::class,'_show']);
+Route::get('comments/post/{id}', [commentsController::class,'compost']);
+Route::post('comments', [commentsController::class,'_store']);
+Route::put('comments/{id}', [commentsController::class,'_update']);
+Route::delete('comments/{id}', [commentsController::class,'_delete']);
+
+/** routes para type_reaction **/
+
+Route::get('type_reactions', [type_reactionController::class,'_index']);
+Route::get('type_reactions/{id}', [type_reactionController::class,'_show']);
+Route::post('type_reactions', [type_reactionController::class,'_store']);
+Route::put('type_reactions/{id}', [type_reactionController::class,'_update']);
+Route::delete('type_reactions/{id}', [type_reactionController::class,'_delete']);
+
+/** routes para reaction **/
+
+Route::get('reactions', [reactionController::class,'_index']);
+Route::get('reactions/{id}', [reactionController::class,'_show']);
+Route::get('reactions/post/{id}', [reactionController::class,'reacpost']);
+Route::post('reactions', [reactionController::class,'_store']);
+Route::put('reactions/{id}', [reactionController::class,'_update']);
+Route::delete('reactions/{id}', [reactionController::class,'_delete']);
+
+/** routes para seguidores **/
+
+Route::get('seguidores', [seguidoresController::class,'_index']);
+Route::get('seguidores/{id}', [seguidoresController::class,'_show']);
+Route::get('seguidores/usu/{id}', [seguidoresController::class,'seguidos']);
+Route::get('seguidos/profile/{id}', [seguidoresController::class,'seguidores']);
+Route::post('seguidores', [seguidoresController::class,'_store']);
+Route::put('seguidores/{id}', [seguidoresController::class,'_update']);
+Route::delete('seguidores/{id}', [seguidoresController::class,'_delete']);
 

@@ -1,9 +1,15 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: zippyttech
  * Date: 06/08/18
  * Time: 03:11 PM
+ */
+/**
+ *  Version : 2.0
+ *  Actualizado para Laravel 8
+ *  Autor: Marcos López
  */
 
 namespace App\Console\Commands;
@@ -48,32 +54,32 @@ class GeneratorCommand extends Command
         $name = $this->argument('name');
         $package = $this->argument('package') ?? $name;
 
-        $this->controller($name,$package);
-        $this->service($name,$package);
-        $this->repository($name,$package);
-        $this->model($name,$package);
+        $this->controller($name, $package);
+        $this->service($name, $package);
+        $this->repository($name, $package);
+        $this->model($name, $package);
 
         $this->getBr($name);
         $separator = '\\';
-        File::append(base_path('routes/api.php'), '$router->get(\'' . Str::plural(strtolower($name)) . "', '{$package}{$separator}{$name}Controller@_index');\n");
-        File::append(base_path('routes/api.php'), '$router->get(\'' .  Str::plural(strtolower($name)) . "/{id}', '{$package}{$separator}{$name}Controller@_show');\n");
-        File::append(base_path('routes/api.php'), '$router->post(\'' .  Str::plural(strtolower($name)) . "', '{$package}{$separator}{$name}Controller@_store');\n");
-        File::append(base_path('routes/api.php'), '$router->put(\'' .  Str::plural(strtolower($name)) . "/{id}', '{$package}{$separator}{$name}Controller@_update');\n");
-        File::append(base_path('routes/api.php'), '$router->delete(\'' .  Str::plural(strtolower($name)) . "/{id}', '{$package}{$separator}{$name}Controller@_destroy');\n");
+        File::append(base_path('routes/api.php'), "Route::get('" . Str::plural(strtolower($name)) . "', [\App\Http\Controllers\\" . $package . $separator . $name . "Controller::class,'_index']);\n");
+        File::append(base_path('routes/api.php'), "Route::get('" .  Str::plural(strtolower($name)) . "/{id}', [\App\Http\Controllers\\" . $package . $separator . $name . "Controller::class,'_show']);\n");
+        File::append(base_path('routes/api.php'), "Route::post('" .  Str::plural(strtolower($name)) . "', [\App\Http\Controllers\\" . $package . $separator . $name . "Controller::class,'_store']);\n");
+        File::append(base_path('routes/api.php'), "Route::put('" .  Str::plural(strtolower($name)) . "/{id}', [\App\Http\Controllers\\" . $package . $separator . $name . "Controller::class,'_update']);\n");
+        File::append(base_path('routes/api.php'), "Route::delete('" .  Str::plural(strtolower($name)) . "/{id}', [\App\Http\Controllers\\" . $package . $separator . $name . "Controller::class,'_destroy']);\n");
     }
 
-    protected function model($name,$package)
+    protected function model($name, $package)
     {
         $modelTemplate = str_replace(
-            ['{{modelName}}','package'],
-            [$name,$package],
+            ['{{modelName}}', 'package'],
+            [$name, $package],
             $this->getStub('Model')
         );
 
-        file_put_contents((app()->basePath()."/app/Models/{$name}.php"), $modelTemplate);
+        file_put_contents((app()->basePath() . "/app/Models/{$name}.php"), $modelTemplate);
     }
 
-    protected function controller($name,$package)
+    protected function controller($name, $package)
     {
         $controllerTemplate = str_replace(
             [
@@ -84,18 +90,18 @@ class GeneratorCommand extends Command
             ],
             [
                 $name,
-                strtolower( Str::plural($name)),
+                strtolower(Str::plural($name)),
                 strtolower($name),
                 $package
             ],
             $this->getStub('Controller')
         );
-        mkdir((app()->basePath()."/app/Http/Controllers/{$package}"));
+        mkdir((app()->basePath() . "/app/Http/Controllers/{$package}"));
 
-        file_put_contents((app()->basePath()."/app/Http/Controllers/{$package}/{$name}Controller.php"), $controllerTemplate);
+        file_put_contents((app()->basePath() . "/app/Http/Controllers/{$package}/{$name}Controller.php"), $controllerTemplate);
     }
 
-    protected function service($name,$package)
+    protected function service($name, $package)
     {
         $controllerTemplate = str_replace(
             [
@@ -106,17 +112,18 @@ class GeneratorCommand extends Command
             ],
             [
                 $name,
-                strtolower( Str::plural($name)),
+                strtolower(Str::plural($name)),
                 strtolower($name),
                 $package
             ],
             $this->getStub('Service')
         );
-        mkdir((app()->basePath()."/app/Services/{$package}"));
+        mkdir((app()->basePath() . "/app/Services/{$package}"));
 
-        file_put_contents((app()->basePath()."/app/Services/{$package}/{$name}Service.php"), $controllerTemplate);    }
+        file_put_contents((app()->basePath() . "/app/Services/{$package}/{$name}Service.php"), $controllerTemplate);
+    }
 
-    protected function repository($name,$package)
+    protected function repository($name, $package)
     {
         $controllerTemplate = str_replace(
             [
@@ -127,18 +134,19 @@ class GeneratorCommand extends Command
             ],
             [
                 $name,
-                strtolower( Str::plural($name)),
+                strtolower(Str::plural($name)),
                 strtolower($name),
                 $package
             ],
             $this->getStub('Repository')
         );
-        mkdir((app()->basePath()."/app/Repositories/" . $package));
-        file_put_contents((app()->basePath()."/app/Repositories/{$package}/{$name}Repository.php"), $controllerTemplate);    }
+        mkdir((app()->basePath() . "/app/Repositories/" . $package));
+        file_put_contents((app()->basePath() . "/app/Repositories/{$package}/{$name}Repository.php"), $controllerTemplate);
+    }
 
     protected function getStub($type)
     {
-       // echo resource_path("Generator/stubs/$type.stub");
+        // echo resource_path("Generator/stubs/$type.stub");
         return file_get_contents(resource_path("Generator/stubs/$type.stub"));
     }
 

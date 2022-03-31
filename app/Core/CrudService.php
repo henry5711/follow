@@ -177,7 +177,7 @@ class CrudService
     }
 
     public function _delete($id)
-    {  
+    {
         return $this->repository->_delete($id);
     }
 
@@ -189,7 +189,7 @@ class CrudService
 
         $tks = explode('.', $token);
         list($headb64, $bodyb64, $cryptob64) = $tks;
-        $user = JWT::jsonDecode(JWT::urlsafeB64Decode($bodyb64));
+        $user = jtw::jsonDecode(JWT::urlsafeB64Decode($bodyb64));
 
         if($user){
             $user->account = $request->account;

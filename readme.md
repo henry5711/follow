@@ -1,393 +1,61 @@
-# Project: Orders
-## Description: API para carrito de compra
-# 📁 Collection: orders 
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
+<p align="center">
+<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
+</p>
 
-## End-point: index
-### Description: lista todas los pedidos existentes
-Method: GET
->```
->{{local}}/api/orders
->```
-### 🔑 Authentication bearer
+## About Laravel
 
-|Param|value|Type|
-|---|---|---|
-|token|{{token}}|string|
-|password|{{token}}|string|
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+## Learning Laravel
 
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-## End-point: show
-### Description: mostrará pedidos por el id
-Method: GET
->```
->{{local}}/api/orders/1
->```
-### 🔑 Authentication bearer
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-|Param|value|Type|
-|---|---|---|
-|token|{{token}}|string|
-|password|{{token}}|string|
+## Laravel Sponsors
 
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
+### Premium Partners
 
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Cubet Techno Labs](https://cubettech.com)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[Many](https://www.many.co.uk)**
+- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
+- **[DevSquad](https://devsquad.com)**
+- **[OP.GG](https://op.gg)**
 
+## Contributing
 
-## End-point: store
-### Description: en el post se creara el pedido con el id del user perteniciente a msa_account, el id de la tienda, el id de la venta y el id del status a la que le comprará los producto, para posteriormente ir añadiendole productos
-Method: POST
->```
->{{local}}/api/orders
->```
-### Headers
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-|Content-Type|Value|
-|---|---|
-|Accept|application/json|
+## Code of Conduct
 
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-### Headers
+## Security Vulnerabilities
 
-|Content-Type|Value|
-|---|---|
-|Content-Type|application/json|
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
+## License
 
-### Body (**raw**)
-
-```json
-{
-    "status_id": 1, 
-    "msa_account": 865,
-    "store_id": 234,
-    "sale_id": 22
-}
-```
-
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|{{token}}|string|
-|password|{{token}}|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-
-## End-point: update
-### Description: en el update solo se modificara el status id
-Method: PUT
->```
->{{local}}/api/orders/2
->```
-### Body (**raw**)
-
-```json
-{
-    "status_id": 3
-}
-```
-
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|{{token}}|string|
-|password|{{token}}|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-
-## End-point: delete
-### Description: cuando se elimina un pedido se hace un borrado en cascada a los productos asociados
-Method: DELETE
->```
->{{local}}/api/orders/5
->```
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|{{token}}|string|
-|password|{{token}}|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-
-## End-point: orders by user
-### Description: En esta sección se obtienen todos los pedidos asociados a un id de usuario
-Method: GET
->```
->{{local}}/api/user/orders/865
->```
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-# 📁 Collection: products 
-
-
-## End-point: index
-### Description: este endpoint muestra todos los productos
-Method: GET
->```
->{{local}}/api/products
->```
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|{{token}}|string|
-|password|{{token}}|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-
-## End-point: show
-### Description: este endpoint muestra un producto a traves de su id
-Method: GET
->```
->{{local}}/api/products/4
->```
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|{{token}}|string|
-|password|{{token}}|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-
-## End-point: store
-### Description: al añadir un producto se suma su costo total en el pedido
-Method: POST
->```
->{{local}}/api/products
->```
-### Headers
-
-|Content-Type|Value|
-|---|---|
-|Accept|application/json|
-
-
-### Headers
-
-|Content-Type|Value|
-|---|---|
-|Content-Type|application/json|
-
-
-### Body (**raw**)
-
-```json
-{
-    "name": "oreo'os",
-    "order_id": 2,
-    "detail": "cereales",
-    "price": 5.35,
-    "quantity": 4
-}
-```
-
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|{{token}}|string|
-|password|{{token}}|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-
-## End-point: update
-### Description: al modificar el precio o la cantidad de productos en el pedido se cambiara el valor del monto total en el pedido
-Method: PUT
->```
->{{local}}/api/products/3
->```
-### Body (**raw**)
-
-```json
-{
-    "price": 0.20,
-    "quantity": 1
-}
-```
-
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|{{token}}|string|
-|password|{{token}}|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-
-## End-point: delete
-### Description: al eliminar un producto de un pedido se resta el valor que tenia en el coste total del pedido
-Method: DELETE
->```
->{{local}}/api/products/1
->```
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|{{token}}|string|
-|password|{{token}}|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-
-## End-point: ProductsByOrder
-### Description: En este endpoint se obtiene la lista de productos asociados a un pedido
-Method: GET
->```
->{{local}}/api/order/products/5000
->```
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-# 📁 Collection: status 
-
-
-## End-point: index
-### Description: muestra todos los estatus
-Method: GET
->```
->{{local}}/api/statuses
->```
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|{{token}}|string|
-|password|{{token}}|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-
-## End-point: show
-### Description: 
-Method: GET
->```
->{{local}}/api/statuses/1
->```
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|{{token}}|string|
-|password|{{token}}|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-
-## End-point: store
-### Description: se guarda el estatus de un producto
-Method: POST
->```
->{{local}}/api/statuses
->```
-### Headers
-
-|Content-Type|Value|
-|---|---|
-|Accept|application/json|
-
-
-### Headers
-
-|Content-Type|Value|
-|---|---|
-|Content-Type|application/json|
-
-
-### Body (**raw**)
-
-```json
-{
-    "name": "en proceso",
-    "detail": ""
-}
-```
-
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|{{token}}|string|
-|password|{{token}}|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-
-## End-point: update
-### Description: se modifica el estatus de un producto lo que puede restringir la modificación de datos en un pedido
-Method: PUT
->```
->{{local}}/api/statuses/1
->```
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|{{token}}|string|
-|password|{{token}}|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-
-## End-point: delete Copy
-### Description: al eliminar un producto de un pedido se resta el valor que tenia en el coste total del pedido
-Method: DELETE
->```
->{{local}}/api/status/1
->```
-### 🔑 Authentication bearer
-
-|Param|value|Type|
-|---|---|---|
-|token|{{token}}|string|
-|password|{{token}}|string|
-
-
-
-⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
-
-_________________________________________________
-Author: [bautistaj](https://github.com/bautistaj)
-
-Package: [postman-to-markdown](https://github.com/bautistaj)
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

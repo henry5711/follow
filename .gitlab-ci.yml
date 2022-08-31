@@ -4,7 +4,6 @@ stages:
   - deploy
   - rollback
 
-
 dev_backup_job:
   stage: backup
   script:

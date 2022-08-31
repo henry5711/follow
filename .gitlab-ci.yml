@@ -17,7 +17,7 @@ dev_backup_job:
 dev_build_job:
   stage: build
   script:
-  
+
     - cp .env.example .env
     - sed -i -e "s;^\s*SECRET_KEY=.*;SECRET_KEY=$SECRET_KEY;g" .env
     - sed -i -e "s;^\s*DB_CONNECTION=.*;DB_CONNECTION=pgsql;g" .env
@@ -28,7 +28,10 @@ dev_build_job:
     - sed -i -e "s;^\s*DB_PORT=.*;DB_PORT=5432;g" .env
     - sed -i -e "s;^\s*DEBUG=.*;DEBUG=1;g" .env
     - echo "APP_URL=https://devrubick2follow.zippyttech.com" >> .env
-    - echo "#WASTE_API=https://devrubick2follow.zippyttech.com/api/" >> .env 
+    - echo "#WASTE_API=https://devrubick2follow.zippyttech.com/api/" >> .env
+    - sed -i -e "s;^\s*DB_DATABASE_USER=.*;DB_DATABASE_USER=devrubick2user;g" .env
+    - sed -i -e "s;^\s*DB_USERNAME_READ=.*;DB_USERNAME_READ=devrubick2user;g" .env
+    - sed -i -e "s;^\s*DB_PASSWORD_READ=.*;DB_PASSWORD_READ=zippy123;g" .env
     - docker build -t devrubick2follow-api .
   when: on_success
   tags:
@@ -85,12 +88,15 @@ qa_build_job:
     - sed -i -e "s;^\s*DEBUG=.*;DEBUG=1;g" .env
     - sed -i -e "s;^\s*APP_URL=.*;APP_URL=qareservas.berygo.com;g" .env
     - echo "APP_URL=https://qarubick2follow.zippyttech.com" >> .env
-    - echo "URL_API_ACCOUNT=https://qarubick2follow.zippyttech.com" >> .env 
-    - echo "URL_API_CLIENT=https://qarubick2follow.zippyttech.com" >> .env 
-    - echo "URL_API_NOTIFICATION=https://qarubick2notifications.zippyttech.com" >> .env 
-    - echo "URL_API_WALLET=https://qarubick2wallet.zippyttech.com" >> .env 
-    - echo "URL_API_USER=https://qarubick2user.zippyttech.com" >> .env 
-    - echo "#WASTE_API=https://qarubick2waste.zippyttech.com/api/" >> .env 
+    - echo "URL_API_ACCOUNT=https://qarubick2follow.zippyttech.com" >> .env
+    - echo "URL_API_CLIENT=https://qarubick2follow.zippyttech.com" >> .env
+    - echo "URL_API_NOTIFICATION=https://qarubick2notifications.zippyttech.com" >> .env
+    - echo "URL_API_WALLET=https://qarubick2wallet.zippyttech.com" >> .env
+    - echo "URL_API_USER=https://qarubick2user.zippyttech.com" >> .env
+    - echo "#WASTE_API=https://qarubick2waste.zippyttech.com/api/" >> .env
+    - sed -i -e "s;^\s*DB_DATABASE_USER=.*;DB_DATABASE_USER=qarubick2user;g" .env
+    - sed -i -e "s;^\s*DB_USERNAME_READ=.*;DB_USERNAME_READ=qarubick2;g" .env
+    - sed -i -e "s;^\s*DB_PASSWORD_READ=.*;DB_PASSWORD_READ=123qwe123;g" .env
     - docker build -t qarubick2follow-api .
   when: on_success
   tags:
@@ -147,12 +153,12 @@ prod_build_job:
     - sed -i -e "s;^\s*DEBUG=.*;DEBUG=0;g" .env
     - sed -i -e "s;^\s*APP_URL=.*;APP_URL=reservas.berygo.com;g" .env
     - echo "#API_URL:" >> .env
-    - echo "URL_API_ACCOUNT=https://rubick2account.zippyttech.com" >> .env 
-    - echo "URL_API_CLIENT=https://rubick2client.zippyttech.com" >> .env 
-    - echo "URL_API_NOTIFICATION=https://rubick2notifications.zippyttech.com" >> .env 
-    - echo "URL_API_WALLET=https://rubick2wallet.zippyttech.com" >> .env 
-    - echo "URL_API_USER=https://rubick2user.zippyttech.com" >> .env 
-    - echo "WASTE_API=https://rubick2waste.zippyttech.com/api/" >> .env 
+    - echo "URL_API_ACCOUNT=https://rubick2account.zippyttech.com" >> .env
+    - echo "URL_API_CLIENT=https://rubick2client.zippyttech.com" >> .env
+    - echo "URL_API_NOTIFICATION=https://rubick2notifications.zippyttech.com" >> .env
+    - echo "URL_API_WALLET=https://rubick2wallet.zippyttech.com" >> .env
+    - echo "URL_API_USER=https://rubick2user.zippyttech.com" >> .env
+    - echo "WASTE_API=https://rubick2waste.zippyttech.com/api/" >> .env
     - docker build -t rubick2follow-api .
   when: on_success
   tags:
@@ -200,12 +206,12 @@ berygo_build_job:
     - sed -i -e "s;^\s*DEBUG=.*;DEBUG=0;g" .env
     - sed -i -e "s;^\s*APP_URL=.*;APP_URL=https://follow.berygo.com;g" .env
     - echo "APP_URL=https://follow.berygo.com" >> .env
-    - echo "URL_API_ACCOUNT=https://account.berygo.com" >> .env 
-    - echo "URL_API_CLIENT=https://client.berygo.com" >> .env 
-    - echo "URL_API_NOTIFICATION=https://notifications.berygo.com" >> .env 
-    - echo "URL_API_WALLET=https://wallet.berygo.com" >> .env 
-    - echo "URL_API_USER=https://user.berygo.com" >> .env 
-    - echo "WASTE_API=https://waste.berygo.com/api/" >> .env 
+    - echo "URL_API_ACCOUNT=https://account.berygo.com" >> .env
+    - echo "URL_API_CLIENT=https://client.berygo.com" >> .env
+    - echo "URL_API_NOTIFICATION=https://notifications.berygo.com" >> .env
+    - echo "URL_API_WALLET=https://wallet.berygo.com" >> .env
+    - echo "URL_API_USER=https://user.berygo.com" >> .env
+    - echo "WASTE_API=https://waste.berygo.com/api/" >> .env
     - docker build -t follow-api .
   when: on_success
   tags:
@@ -240,12 +246,12 @@ cdg_build_job:
     - sed -i -e "s;^\s*DEBUG=.*;DEBUG=0;g" .env
     - sed -i -e "s;^\s*APP_URL=.*;APP_URL=follow-cdg.zippyttech.com;g" .env
     - echo "APP_URL=https://client-cdg.com" >> .env
-    - echo "URL_API_ACCOUNT=https://follow-cdg.zippyttech.com" >> .env 
-    - echo "URL_API_CLIENT=https://follow-cdg.zippyttech.com" >> .env 
-    - echo "URL_API_NOTIFICATION=https://notifications-cdg.zippyttech.com" >> .env 
-    - echo "URL_API_WALLET=https://wallet-cdg.zippyttech.com" >> .env 
-    - echo "URL_API_USER=https://user-cdg.zippyttech.com" >> .env 
-    - echo "WASTE_API=https://waste-cdg.zippyttech.com/api/" >> .env 
+    - echo "URL_API_ACCOUNT=https://follow-cdg.zippyttech.com" >> .env
+    - echo "URL_API_CLIENT=https://follow-cdg.zippyttech.com" >> .env
+    - echo "URL_API_NOTIFICATION=https://notifications-cdg.zippyttech.com" >> .env
+    - echo "URL_API_WALLET=https://wallet-cdg.zippyttech.com" >> .env
+    - echo "URL_API_USER=https://user-cdg.zippyttech.com" >> .env
+    - echo "WASTE_API=https://waste-cdg.zippyttech.com/api/" >> .env
     - docker build -t follow-api .
   when: on_success
   tags:
@@ -279,13 +285,13 @@ aguaseo_build_job:
     - sed -i -e "s;^\s*DB_PORT=.*;DB_PORT=5432;g" .env
     - sed -i -e "s;^\s*DEBUG=.*;DEBUG=0;g" .env
     - sed -i -e "s;^\s*APP_URL=.*;APP_URL=follow.rubick.aguaseo.com;g" .env
-    - echo "APP_URL=https://follow-aguaseo.zippyttech.com" >> .env 
-    - echo "URL_API_ACCOUNT=https://account-aguaseo.zippyttech.com" >> .env 
-    - echo "URL_API_CLIENT=https://client-aguaseo.zippyttech.com" >> .env 
-    - echo "URL_API_NOTIFICATION=https://notifications-aguaseo.zippyttech.com" >> .env 
-    - echo "URL_API_WALLET=https://wallet-aguaseo.zippyttech.com" >> .env 
-    - echo "URL_API_USER=https://user-aguaseo.zippyttech.com" >> .env 
-    - echo "WASTE_API=https://waste-aguaseo.zippyttech.com/api/" >> .env 
+    - echo "APP_URL=https://follow-aguaseo.zippyttech.com" >> .env
+    - echo "URL_API_ACCOUNT=https://account-aguaseo.zippyttech.com" >> .env
+    - echo "URL_API_CLIENT=https://client-aguaseo.zippyttech.com" >> .env
+    - echo "URL_API_NOTIFICATION=https://notifications-aguaseo.zippyttech.com" >> .env
+    - echo "URL_API_WALLET=https://wallet-aguaseo.zippyttech.com" >> .env
+    - echo "URL_API_USER=https://user-aguaseo.zippyttech.com" >> .env
+    - echo "WASTE_API=https://waste-aguaseo.zippyttech.com/api/" >> .env
     - docker build -t aguaseo-follow-api .
   when: on_success
   tags:
@@ -320,12 +326,12 @@ bukewallet_build_job:
     - sed -i -e "s;^\s*DEBUG=.*;DEBUG=0;g" .env
     - sed -i -e "s;^\s*APP_URL=.*;APP_URL=follow.bukewallet.com;g" .env
     - echo "#API_URL:" >> .env
-    - echo "APP_URL=https://follow.bukewallet.com" >> .env 
-    - echo "URL_API_ACCOUNT=https://account.bukewallet.com" >> .env 
-    - echo "URL_API_CLIENT=https://client.bukewallet.com" >> .env 
-    - echo "URL_API_NOTIFICATION=https://notifications.bukewallet.com" >> .env 
-    - echo "URL_API_WALLET=https://wallet.bukewallet.com" >> .env 
-    - echo "URL_API_USER=https://user.bukewallet.com" >> .env 
+    - echo "APP_URL=https://follow.bukewallet.com" >> .env
+    - echo "URL_API_ACCOUNT=https://account.bukewallet.com" >> .env
+    - echo "URL_API_CLIENT=https://client.bukewallet.com" >> .env
+    - echo "URL_API_NOTIFICATION=https://notifications.bukewallet.com" >> .env
+    - echo "URL_API_WALLET=https://wallet.bukewallet.com" >> .env
+    - echo "URL_API_USER=https://user.bukewallet.com" >> .env
     - docker build -t bukewallet-follow-api .
   when: on_success
   tags:

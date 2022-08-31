@@ -27,9 +27,18 @@ class postService extends CrudService
 
     public function _store(Request $request)
     {
-        $img= new ImageService();
-        $e=$img->images($request->contenido);
-        $request['contenido']=$e;
+
+        if(isset($request->contenido)){
+
+            foreach ($request->contenido as $image){
+                //dd($image);
+                $img[] = (new ImageService())->image($image);
+            }
+        }
+
+        if(isset($img)){
+            $request['contenido'] = json_encode($img);
+        }
         $request['status']='Activa';
         $request['fecha']=Carbon::now();
 

@@ -9,5 +9,18 @@ class post extends CrudModel
 {
     protected $guarded = ['id'];
     protected $table= 'post';
-    protected $fillable=['title','user_id','user_name','contenido','fecha','status'];
+    protected $fillable=['title','user_id','contenido','fecha','status'];
+
+    public function user()
+    {
+        return $this->hasMany(User::class,'user_id');
+    }
+
+    public function comments(){
+        return $this->hasMany(comments::class);
+    }
+
+    public function reaction(){
+        return $this->hasMany(reaction::class);
+    }
 }

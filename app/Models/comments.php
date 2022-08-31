@@ -10,4 +10,8 @@ class comments extends CrudModel
     protected $guarded = ['id'];
     protected $table= 'coments';
     protected $fillable=['user_id','user_name','contend','fk_post_id','sta'];
+
+    public function post(){
+        return $this->belongsTo(post::class, 'fk_post_id');
+    }
 }

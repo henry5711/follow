@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\post\postController;
+use App\Http\Controllers\seguidores\seguidoresController;
+use App\Http\Controllers\reaction\reactionController;
+use App\Http\Controllers\comments\commentsController;
+use App\Http\Controllers\type_reaction\type_reactionController;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;

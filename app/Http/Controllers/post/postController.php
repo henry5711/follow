@@ -20,7 +20,7 @@ class postController extends CrudController
 
     public function postuser($id)
     {
-        $postus=post::with('user')->with('comments')->with('reaction')->where('user_id',$id)->get();
+        $postus=post::with('user')->where('user_id',$id)->get();
         return ["list"=>$postus,"total"=>count($postus)];
     }
 

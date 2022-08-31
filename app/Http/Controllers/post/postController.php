@@ -20,7 +20,7 @@ class postController extends CrudController
 
     public function postuser($id)
     {
-        $postus=post::where('user_id',$id)->get();
+        $postus=post::with('user')->with('comments')->with('reaction')->where('user_id',$id)->get();
         return ["list"=>$postus,"total"=>count($postus)];
     }
 
@@ -37,9 +37,9 @@ class postController extends CrudController
         }
 
        $ids_usus=$cole->unique();
-      
-      
-       $pos=post::whereIn('user_id',$ids_usus)->orderBy('fecha')->get();
+
+
+       $pos=post::with('user')->whereIn('user_id',$ids_usus)->orderBy('fecha')->get();
 
         return $pos;
     }

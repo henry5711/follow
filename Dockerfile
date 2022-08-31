@@ -30,5 +30,6 @@ COPY . /var/www/html
 RUN cd /var/www/html && composer install
 
 RUN chmod -R 777 storage && chmod -R 777 public/images/
+EXPOSE 80
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 

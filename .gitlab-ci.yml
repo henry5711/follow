@@ -69,7 +69,7 @@ qa_backup_job:
   script:
     - docker image tag qarubick2follow-api:latest qarubick2follow-api:prev || true
   tags:
-    - qarubick2
+    - ifx1
   only :
     - qa
 
@@ -82,7 +82,7 @@ qa_build_job:
     - sed -i -e "s;^\s*DB_DATABASE=.*;DB_DATABASE=qarubick2follow;g" .env
     - sed -i -e "s;^\s*DB_USERNAME=.*;DB_USERNAME=qarubick2follow;g" .env
     - sed -i -e "s;^\s*DB_PASSWORD=.*;DB_PASSWORD=$QA_DB_PASS;g" .env
-    - sed -i -e "s;^\s*DB_HOST=.*;DB_HOST=172.17.0.2;g" .env
+    - sed -i -e "s;^\s*DB_HOST=.*;DB_HOST=10.0.0.12;g" .env
     - sed -i -e "s;^\s*DB_PORT=.*;DB_PORT=5432;g" .env
     - sed -i -e "s;^\s*DEBUG=.*;DEBUG=1;g" .env
     - sed -i -e "s;^\s*APP_URL=.*;APP_URL=qareservas.berygo.com;g" .env
@@ -99,7 +99,7 @@ qa_build_job:
     - docker build -t qarubick2follow-api .
   when: on_success
   tags:
-    - qarubick2
+    - ifx1
   only :
     - qa
 
@@ -108,11 +108,11 @@ qa_deploy_job:
   script:
     - docker stop qarubick2follow-api || true
     - docker rm qarubick2follow-api || true
-    - docker run -d --restart always --name qarubick2follow-api --network qaapp -p 8124:80 -v qarubick2follow-api-images:/var/www/html/public/images -v qarubick2follow-api-images:/var/www/html/public/logos qarubick2follow-api
+    - docker run -d --restart always --name qarubick2follow-api --network qaapp -p 9099:80 -v qarubick2follow-api-images:/var/www/html/public/images -v qarubick2follow-api-images:/var/www/html/public/logos qarubick2follow-api
     - docker exec qarubick2follow-api php artisan migrate
   when: on_success
   tags:
-    - qarubick2
+    - ifx1
   only:
     - qa
 
@@ -122,10 +122,10 @@ qa_rollback_job:
     - docker stop qarubick2follow-api || true
     - docker rm qarubick2follow-api || true
     - docker image tag qarubick2follow-api:prev qarubick2follow-api:latest || true
-    - docker run -d --restart always --name qarubick2follow-api --network qaapp -p 8124:80 -v qarubick2follow-api-images:/var/www/html/public/images -v qarubick2follow-api-images:/var/www/html/public/logos qarubick2follow-api
+    - docker run -d --restart always --name qarubick2follow-api --network qaapp -p 9099:80 -v qarubick2follow-api-images:/var/www/html/public/images -v qarubick2follow-api-images:/var/www/html/public/logos qarubick2follow-api
   when: manual
   tags:
-    - qarubick2
+    - ifx1
   only:
     - qa
 

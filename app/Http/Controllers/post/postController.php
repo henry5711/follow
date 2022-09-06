@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Core\CrudController;
 use App\Models\post;
 use App\Models\seguidores;
+use App\Models\User;
 use App\Services\post\postService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +21,11 @@ class postController extends CrudController
 
     public function postuser($id)
     {
-        $postus=post::with('user')->where('user_id',$id)->get();
+        $postus=post::where('user_id',$id)->get();
+        foreach ($postus as $key) {
+            $key->name_user=User::where('id',$key->user_id)->value('full_name');
+            $key->photo_url=User::where('id',$key->user_id)->value('photo_url');
+        }
         return ["list"=>$postus,"total"=>count($postus)];
     }
 
@@ -39,7 +44,11 @@ class postController extends CrudController
        $ids_usus=$cole->unique();
 
 
-       $pos=post::with('user')->whereIn('user_id',$ids_usus)->orderBy('fecha')->get();
+       $pos=post::whereIn('user_id',$ids_usus)->orderBy('fecha')->get();
+       foreach ($pos as $key) {
+        $key->name_user=User::where('id',$key->user_id)->value('full_name');
+        $key->photo_url=User::where('id',$key->user_id)->value('photo_url');
+        }
 
         return $pos;
     }

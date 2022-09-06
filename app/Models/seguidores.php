@@ -9,5 +9,5 @@ class seguidores extends CrudModel
 {
     protected $guarded = ['id'];
     protected $table= 'seguidores';
-    protected $fillable=['user_id','user_name','follow_id','follow_name'];
+    protected $fillable=['user_id','follow_id'];
 }

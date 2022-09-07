@@ -21,7 +21,7 @@ class postRepository extends CrudRepository
 
     public function _index($request = null, $user = null)
     {
-      $post=post::all();
+      $post=post::with('images')->get();
       foreach ($post as $key) {
         $key->name_user=User::where('id',$key->user_id)->value('full_name');
         $key->photo_url=User::where('id',$key->user_id)->value('photo_url');

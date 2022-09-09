@@ -9,7 +9,7 @@ class post extends CrudModel
 {
     protected $guarded = ['id'];
     protected $table= 'post';
-    protected $fillable=['title','user_id','contenido','fecha','status'];
+    protected $fillable=['title','user_id','fecha','status'];
 
     public function user()
     {
@@ -23,4 +23,9 @@ class post extends CrudModel
     public function reaction(){
         return $this->hasMany(reaction::class);
     }
+
+    public function images(){
+        return $this->hasMany(images::class,'id_post');
+    }
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Models\images;
 use App\Models\post;
 use Illuminate\Support\Facades\Storage;
 
@@ -37,11 +38,9 @@ class PostObserver
      */
     public function deleting(post $post)
     {
-        if (isset($post->contenido)) {
-            foreach ($post->contenido as $image){
-                Storage::delete($image);
-            }
-        }
+        $del=images::where('id_post',$post->id)->value('contenido');
+                Storage::delete($del);
+
     }
 
     /**

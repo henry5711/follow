@@ -32,7 +32,7 @@ class postService extends CrudService
 
         if(isset($request->contenido)){
 
-            $path = Storage::putFile('public/images', $request->file('contenido'));
+            $path = Storage::putFile('images', $request->file('contenido'));
             $cont=env('APP_URL').Storage::url($path);
             $contenido['contenido']=$cont;
         }

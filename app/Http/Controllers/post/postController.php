@@ -25,6 +25,7 @@ class postController extends CrudController
         foreach ($postus as $key) {
             $key->name_user=User::where('id',$key->user_id)->value('full_name');
             $key->photo_url=User::where('id',$key->user_id)->value('photo_url');
+            $key->nickname=User::where('id',$key->user_id)->value('nick_name_user');
         }
         return ["list"=>$postus,"total"=>count($postus)];
     }
@@ -48,6 +49,7 @@ class postController extends CrudController
        foreach ($pos as $key) {
         $key->name_user=User::where('id',$key->user_id)->value('full_name');
         $key->photo_url=User::where('id',$key->user_id)->value('photo_url');
+        $key->nickname=User::where('id',$key->user_id)->value('nick_name_user');
         }
 
         return $pos;

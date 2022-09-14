@@ -21,14 +21,14 @@ class postRepository extends CrudRepository
 
     public function _index($request = null, $user = null)
     {
-      $post=post::with('images')->get()->paginate($request->page);
+      $post=post::with('images')->paginate($request->page);
       foreach ($post as $key) {
         $key->name_user=User::where('id',$key->user_id)->value('full_name');
         $key->photo_url=User::where('id',$key->user_id)->value('photo_url');
         $key->nickname=User::where('id',$key->user_id)->value('nick_name_user');
 
       }
-      return ["list"=>$post,"total"=>count($post)];
+      return ["list"=>$post];
     }
 
 }

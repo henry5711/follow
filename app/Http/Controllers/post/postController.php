@@ -19,18 +19,18 @@ class postController extends CrudController
         parent::__construct($service);
     }
 
-    public function postuser($id)
+    public function postuser($id,Request $request)
     {
-        $postus=post::where('user_id',$id)->get();
+        $postus=post::where('user_id',$id)->paginate($request->pag);
         foreach ($postus as $key) {
             $key->name_user=User::where('id',$key->user_id)->value('full_name');
             $key->photo_url=User::where('id',$key->user_id)->value('photo_url');
             $key->nickname=User::where('id',$key->user_id)->value('nick_name_user');
         }
-        return ["list"=>$postus,"total"=>count($postus)];
+        return ["list"=>$postus];
     }
 
-    public function postseguidos($id)
+    public function postseguidos($id,Request $request)
     {
         $seguidos=seguidores::where('user_id',$id)->get();
 
@@ -45,7 +45,7 @@ class postController extends CrudController
        $ids_usus=$cole->unique();
 
 
-       $pos=post::whereIn('user_id',$ids_usus)->orderBy('fecha')->get();
+       $pos=post::whereIn('user_id',$ids_usus)->orderBy('fecha')->paginate($request->pag);
        foreach ($pos as $key) {
         $key->name_user=User::where('id',$key->user_id)->value('full_name');
         $key->photo_url=User::where('id',$key->user_id)->value('photo_url');

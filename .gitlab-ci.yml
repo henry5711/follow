@@ -43,8 +43,9 @@ dev_deploy_job:
   script:
     - docker stop devrubick2follow-api || true
     - docker rm devrubick2follow-api || true
-    - docker run -d --restart always --name devrubick2follow-api --network devapp -p 9028:80 -v devrubick2follow-api-images:/var/www/html/public/images -v devrubick2follow-api-images:/var/www/html/public/logos devrubick2follow-api
+    - docker run -d --restart always --name devrubick2follow-api --network devapp -p 9028:80 -v devrubick2follow-api-images:/var/www/html/storage/app/public/images -v devrubick2follow-api-images:/var/www/html/public/images -v devrubick2follow-api-images:/var/www/html/public/logos devrubick2follow-api
     - docker exec devrubick2follow-api php artisan migrate
+    - docker exec devrubick2follow-api php artisan storage:link
   when: on_success
   tags:
     - devapp
@@ -57,7 +58,7 @@ dev_rollback_job:
     - docker stop devrubick2follow-api || true
     - docker rm devrubick2follow-api || true
     - docker image tag devrubick2follow-api:prev devrubick2follow-api:latest || true
-    - docker run -d --restart always --name devrubick2follow-api --network devapp -p 9028:80 -v devrubick2follow-api-images:/var/www/html/public/images -v devrubick2follow-api-images:/var/www/html/public/logos devrubick2follow-api
+    - docker run -d --restart always --name devrubick2follow-api --network devapp -p 9028:80 -v devrubick2follow-api-images:/var/www/html/storage/app/public/images -v devrubick2follow-api-images:/var/www/html/public/images -v devrubick2follow-api-images:/var/www/html/public/logos devrubick2follow-api
   when: manual
   tags:
     - devapp
@@ -108,8 +109,9 @@ qa_deploy_job:
   script:
     - docker stop qarubick2follow-api || true
     - docker rm qarubick2follow-api || true
-    - docker run -d --restart always --name qarubick2follow-api --network qaapp -p 9099:80 -v qarubick2follow-api-images:/var/www/html/public/images -v qarubick2follow-api-images:/var/www/html/public/logos qarubick2follow-api
+    - docker run -d --restart always --name qarubick2follow-api --network qaapp -p 9099:80 -v qarubick2follow-api-images:/var/www/html/storage/app/public/images -v qarubick2follow-api-images:/var/www/html/public/images -v qarubick2follow-api-images:/var/www/html/public/logos qarubick2follow-api
     - docker exec qarubick2follow-api php artisan migrate
+    - docker exec qarubick2follow-api php artisan storage:link
   when: on_success
   tags:
     - ifx1
@@ -122,7 +124,7 @@ qa_rollback_job:
     - docker stop qarubick2follow-api || true
     - docker rm qarubick2follow-api || true
     - docker image tag qarubick2follow-api:prev qarubick2follow-api:latest || true
-    - docker run -d --restart always --name qarubick2follow-api --network qaapp -p 9099:80 -v qarubick2follow-api-images:/var/www/html/public/images -v qarubick2follow-api-images:/var/www/html/public/logos qarubick2follow-api
+    - docker run -d --restart always --name qarubick2follow-api --network qaapp -p 9099:80 -v qarubick2follow-api-images:/var/www/html/storage/app/public/images -v qarubick2follow-api-images:/var/www/html/public/images -v qarubick2follow-api-images:/var/www/html/public/logos qarubick2follow-api
   when: manual
   tags:
     - ifx1
@@ -170,8 +172,9 @@ prod_deploy_job:
   script:
     - docker stop rubick2follow-api || true
     - docker rm rubick2follow-api || true
-    - docker run -d --restart always --name rubick2follow-api --network app -p 9021:80 -v rubick2follow-api-images:/var/www/html/public/images -v rubick2follow-api-images:/var/www/html/public/logos rubick2follow-api
+    - docker run -d --restart always --name rubick2follow-api --network app -p 9021:80 -v rubick2follow-api-images:/var/www/html/storage/app/public/images -v rubick2follow-api-images:/var/www/html/public/images -v rubick2follow-api-images:/var/www/html/public/logos rubick2follow-api
     - docker exec rubick2follow-api php artisan migrate
+    - docker exec rubick2follow-api php artisan storage:link
   when: on_success
   tags:
     - prodapp
@@ -184,7 +187,7 @@ prod_rollback_job:
     - docker stop rubick2follow-api || true
     - docker rm rubick2follow-api || true
     - docker image tag rubick2follow-api:prev rubick2follow-api:latest || true
-    - docker run -d --restart always --name rubick2follow-api --network app -p 9021:80 -v rubick2follow-api-images:/var/www/html/public/images -v rubick2follow-api-images:/var/www/html/public/logos rubick2follow-api
+    - docker run -d --restart always --name rubick2follow-api --network app -p 9021:80 -v rubick2follow-api-images:/var/www/html/storage/app/public/images -v rubick2follow-api-images:/var/www/html/public/images -v rubick2follow-api-images:/var/www/html/public/logos rubick2follow-api
   when: manual
   tags:
     - prodapp
@@ -263,8 +266,9 @@ cdg_deploy_job:
   script:
     - docker stop follow-api || true
     - docker rm follow-api || true
-    - docker run -d --restart always --name account-api --memory="512m" -v follow-api-images:/var/www/html/public/images -v follow-api-images:/var/www/html/public/logos --network app -p 9024:80 follow-api
+    - docker run -d --restart always --name account-api --memory="512m" -v follow-api-images:/var/www/html/storage/app/public/images -v follow-api-images:/var/www/html/public/images -v follow-api-images:/var/www/html/public/logos --network app -p 9024:80 follow-api
     - docker exec follow-api php artisan migrate
+    - docker exec follow-api php artisan storage:link
   when: on_success
   tags:
     - cdg
@@ -303,8 +307,9 @@ aguaseo_deploy_job:
   script:
     - docker stop aguaseo-follow-api || true
     - docker rm aguaseo-follow-api || true
-    - docker run -d --restart always --name aguaseo-follow-api --memory="512m" -v aguaseo-follow-api-images:/var/www/html/public/images -v aguaseo-client-api-images:/var/www/html/public/logos --network app -p 9026:80 aguaseo-follow-api
+    - docker run -d --restart always --name aguaseo-follow-api --memory="512m" -v aguaseo-follow-api-images:/var/www/html/storage/app/public/images -v aguaseo-follow-api-images:/var/www/html/public/images -v aguaseo-client-api-images:/var/www/html/public/logos --network app -p 9026:80 aguaseo-follow-api
     - docker exec aguaseo-follow-api php artisan migrate
+    - docker exec aguaseo-follow-api php artisan storage:link
   when: on_success
   tags:
     - aguaseo
@@ -343,8 +348,9 @@ bukewallet_deploy_job:
   script:
     - docker stop bukewallet-follow-api || true
     - docker rm bukewallet-follow-api || true
-    - docker run -d --restart always --name bukewallet-follow-api --memory="512m" -v bukewallet-follow-api-images:/var/www/html/public/images -v bukewallet-follow-api-images:/var/www/html/public/logos --network app -p 9026:80 bukewallet-follow-api
+    - docker run -d --restart always --name bukewallet-follow-api --memory="512m" -v bukewallet-follow-api-images:/var/www/html/storage/app/public/images -v bukewallet-follow-api-images:/var/www/html/public/images -v bukewallet-follow-api-images:/var/www/html/public/logos --network app -p 9026:80 bukewallet-follow-api
     - docker exec bukewallet-follow-api php artisan migrate
+    - docker exec bukewallet-follow-api php artisan storage:link
   when: on_success
   tags:
     - bukewallet

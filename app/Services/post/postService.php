@@ -29,19 +29,22 @@ class postService extends CrudService
 
     public function _store(Request $request)
     {
-        dd($request->contenido);
-
-        if(isset($request->contenido)){
-
-            $path = Storage::putFile('public/images', $request->file('contenido'));
-            $cont=env('APP_URL').Storage::url($path);
-            $contenido['contenido']=$cont;
-        }
+       // dd($request->contenido);
         $request['status']='Activa';
         $request['fecha']=Carbon::now('UTC');
 
         $obj=$this->repository->_store($request);
-        $obj->images()->create($contenido);
+
+
+        if(isset($request->contenido)){
+            foreach ($request->contenido as $imagen) {
+                $path = Storage::putFile('public/images', $imagen);
+                $cont=env('APP_URL').Storage::url($path);
+                $contenido['contenido']=$cont;
+                $obj->images()->create($contenido);
+            }
+        }
+
 
         return response()->json([
             "status" => 201,

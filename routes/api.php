@@ -38,7 +38,7 @@ Route::get('/', function () {
 
 /** routes para post **/
 
-Route::get('posts', [postController::class,'_index']);
+Route::get('posts', [postController::class,'_index'])->middleware('cuenta');
 Route::get('posts/{id}', [postController::class,'_show']);
 Route::get('posts/usu/{id}', [postController::class,'postuser']);
 Route::get('posts/index/user/{id}', [postController::class,'postseguidos']);

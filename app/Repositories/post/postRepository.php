@@ -28,7 +28,7 @@ class postRepository extends CrudRepository
         $key->nickname=User::where('id',$key->user_id)->value('nick_name_user');
 
       }
-      return ["list"=>$post,"time_zone"=>$request->cuenta['time_zone']];
+      return ["list"=>$post];
     }
 
 }

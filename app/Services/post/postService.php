@@ -29,6 +29,7 @@ class postService extends CrudService
 
     public function _store(Request $request)
     {
+        dd($request->contenido);
 
         if(isset($request->contenido)){
 
@@ -37,7 +38,7 @@ class postService extends CrudService
             $contenido['contenido']=$cont;
         }
         $request['status']='Activa';
-        $request['fecha']=Carbon::now($request->cuenta['time_zone']);
+        $request['fecha']=Carbon::now('UTC');
 
         $obj=$this->repository->_store($request);
         $obj->images()->create($contenido);

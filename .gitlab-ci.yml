@@ -28,6 +28,7 @@ dev_build_job:
     - sed -i -e "s;^\s*DEBUG=.*;DEBUG=1;g" .env
     - echo "APP_URL=https://devrubick2follow.zippyttech.com" >> .env
     - echo "#WASTE_API=https://devrubick2follow.zippyttech.com/api/" >> .env
+    - echo "USERS_API=https://devrubick2user.zippyttech.com" >> .env
     - sed -i -e "s;^\s*DB_DATABASE_USER=.*;DB_DATABASE_USER=devrubick2user;g" .env
     - sed -i -e "s;^\s*DB_USERNAME_READ=.*;DB_USERNAME_READ=devrubick2user;g" .env
     - sed -i -e "s;^\s*DB_PASSWORD_READ=.*;DB_PASSWORD_READ=zippy123;g" .env
@@ -94,6 +95,7 @@ qa_build_job:
     - echo "URL_API_WALLET=https://qarubick2wallet.zippyttech.com" >> .env
     - echo "URL_API_USER=https://qarubick2user.zippyttech.com" >> .env
     - echo "#WASTE_API=https://qarubick2waste.zippyttech.com/api/" >> .env
+    - echo "USERS_API=https://qarubick2user.zippyttech.com" >> .env
     - sed -i -e "s;^\s*DB_DATABASE_USER=.*;DB_DATABASE_USER=qarubick2user;g" .env
     - sed -i -e "s;^\s*DB_USERNAME_READ=.*;DB_USERNAME_READ=qarubick2;g" .env
     - sed -i -e "s;^\s*DB_PASSWORD_READ=.*;DB_PASSWORD_READ=123qwe123;g" .env

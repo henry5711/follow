@@ -42,7 +42,7 @@ Route::get('posts', [postController::class,'_index']);
 Route::get('posts/{id}', [postController::class,'_show']);
 Route::get('posts/usu/{id}', [postController::class,'postuser']);
 Route::get('posts/index/user/{id}', [postController::class,'postseguidos']);
-Route::post('posts', [postController::class,'_store']);
+Route::post('posts', [postController::class,'_store'])->middleware('cuenta');
 Route::put('posts/{id}', [postController::class,'_update']);
 Route::delete('posts/{id}', [postController::class,'_delete']);
 

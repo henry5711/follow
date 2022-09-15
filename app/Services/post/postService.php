@@ -29,7 +29,7 @@ class postService extends CrudService
 
     public function _store(Request $request)
     {
-        var_dump($request->contenido);
+        dd($request->contenido);
 
         if(isset($request->contenido)){
 

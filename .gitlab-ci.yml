@@ -87,8 +87,7 @@ qa_build_job:
     - sed -i -e "s;^\s*DB_HOST=.*;DB_HOST=10.0.0.12;g" .env
     - sed -i -e "s;^\s*DB_PORT=.*;DB_PORT=5432;g" .env
     - sed -i -e "s;^\s*DEBUG=.*;DEBUG=1;g" .env
-    - sed -i -e "s;^\s*APP_URL=.*;APP_URL=qareservas.berygo.com;g" .env
-    - echo "APP_URL=https://qarubick2follow.zippyttech.com" >> .env
+    - sed -i -e "s;^\s*APP_URL=.*;APP_URL=https://qarubick2follow.zippyttech.com;g" .env
     - echo "URL_API_ACCOUNT=https://qarubick2follow.zippyttech.com" >> .env
     - echo "URL_API_CLIENT=https://qarubick2follow.zippyttech.com" >> .env
     - echo "URL_API_NOTIFICATION=https://qarubick2notifications.zippyttech.com" >> .env
@@ -97,8 +96,8 @@ qa_build_job:
     - echo "#WASTE_API=https://qarubick2waste.zippyttech.com/api/" >> .env
     - echo "USERS_API=https://qarubick2user.zippyttech.com" >> .env
     - sed -i -e "s;^\s*DB_DATABASE_USER=.*;DB_DATABASE_USER=qarubick2user;g" .env
-    - sed -i -e "s;^\s*DB_USERNAME_READ=.*;DB_USERNAME_READ=qarubick2;g" .env
-    - sed -i -e "s;^\s*DB_PASSWORD_READ=.*;DB_PASSWORD_READ=123qwe123;g" .env
+    - sed -i -e "s;^\s*DB_USERNAME_READ=.*;DB_USERNAME_READ=qarubick2user;g" .env
+    - sed -i -e "s;^\s*DB_PASSWORD_READ=.*;DB_PASSWORD_READ=k6R+1I8k0uc=;g" .env
     - docker build -t qarubick2follow-api .
   when: on_success
   tags:

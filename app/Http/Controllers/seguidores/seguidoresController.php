@@ -43,4 +43,10 @@ class seguidoresController extends CrudController
         }
         return ["list"=>$seguidos,"total"=>count($seguidos)];
     }
+
+    public function totalseguidos($id){
+        $seguidos=seguidores::where('user_id',$id)->count();
+        $seguidores=seguidores::where('follow_id',$id)->count();
+        return ["seguidos"=>$seguidos,"seguidores"=>$seguidores];
+    }
 }

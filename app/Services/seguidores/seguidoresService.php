@@ -28,7 +28,7 @@ class seguidoresService extends CrudService
     {
         $verifi=seguidores::where('user_id',$request->user_id)->where('follow_id',$request->follow_id)->first();
         if(isset($verifi)){
-            return Response()->json(["error" => true ,"message" => "ya seguies a este usuario"], 404);
+            return response()->json(['status'=>400,'message'=>'ya estas siguendo a este usuario'],400);
         }
     }
 

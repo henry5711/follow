@@ -20,8 +20,10 @@ class seguidoresController extends CrudController
       $seguidos=seguidores::where('user_id',$id)->get();
       foreach ($seguidos as $key) {
         $key->name_user=User::where('id',$key->user_id)->value('full_name');
+        $key->nickname_user=User::where('id',$key->user_id)->value('nick_name_user');
         $key->photo_url_user=User::where('id',$key->user_id)->value('photo_url');
         $key->name_follow=User::where('id',$key->follow_id)->value('full_name');
+        $key->nickname_follow=User::where('id',$key->follow_id)->value('nick_name_user');
         $key->photo_url_follow=User::where('id',$key->follow_id)->value('photo_url');
 
     }

@@ -51,4 +51,13 @@ class seguidoresController extends CrudController
         $seguidores=seguidores::where('follow_id',$id)->count();
         return ["seguidos"=>$seguidos,"seguidores"=>$seguidores];
     }
+
+    public function listusuario(){
+        $users = User::where('act_profile',true)->get();
+        foreach ($users as $user) {
+           $user['seguidos']=seguidores::where('user_id',$user->id)->count();
+           $user['seguidores']=seguidores::where('follow_id',$user->id)->count();
+        }
+        return ["list"=>$users,"total"=>count($users)];
+    }
 }

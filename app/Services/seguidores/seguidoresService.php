@@ -30,6 +30,9 @@ class seguidoresService extends CrudService
         if(isset($verifi)){
             return response()->json(['status'=>400,'message'=>'ya estas siguendo a este usuario'],400);
         }
+        else {
+            return parent::_store($request);
+        }
     }
 
 }

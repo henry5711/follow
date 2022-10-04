@@ -65,7 +65,7 @@ class seguidoresController extends CrudController
         $del=seguidores::where('user_id',$request->user_id)
         ->where('follow_id',$request->follow_id)->first();
 
-        if(isset($del)){
+        if(empty($del)){
             return response()->json(['message' => 'no estas sigiendo a este usuario'],400);
         }
         else

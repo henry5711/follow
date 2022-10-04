@@ -64,7 +64,8 @@ class seguidoresController extends CrudController
     public function unfollow(Request $request){
         $del=seguidores::where('user_id',$request->user_id)
         ->where('follow_id',$request->follow_id)->first();
-        if(count($del)>0){
+        dd($del);
+        if(isset($del)){
             $delete=$del->delete();
             return response()->json(['message' => 'deleted'],200);
         }

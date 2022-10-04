@@ -60,4 +60,18 @@ class seguidoresController extends CrudController
         }
         return ["list"=>$users,"total"=>count($users)];
     }
+
+    public function unfollow(Request $request){
+        $del=seguidores::where('user_id',$request->user_id)
+        ->where('follow_id',$request->follow_id)->first();
+        if(isset($del)){
+            return response()->json(['message' => 'no estas sigiendo a este usuario'],400);
+        }
+        else
+        {
+            $delete=$del->delete();
+            return response()->json(['message' => 'deleted'],200);
+        }
+
+    }
 }

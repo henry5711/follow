@@ -70,7 +70,7 @@ class seguidoresController extends CrudController
         }
         else
         {
-            $delete=$del->delete();
+            $del->delete();
             return response()->json(['message' => 'deleted'],200);
         }
 

@@ -83,5 +83,5 @@ Route::get('seguidos/profile/{id}', [seguidoresController::class,'seguidores']);
 Route::post('seguidores', [seguidoresController::class,'_store']);
 Route::put('seguidores/{id}', [seguidoresController::class,'_update']);
 Route::delete('seguidores/{id}', [seguidoresController::class,'_delete']);
-Route::delete('unfollow/user', [seguidoresController::class,'unfollow']);
+Route::post('unfollow/user', [seguidoresController::class,'unfollow']);
 

@@ -22,7 +22,7 @@ class type_reactionController extends CrudController
         try {
             DB::beginTransaction();
 
-            $id =  $this->createLottery($request);
+            $id =  $this->createTypeReaction($request);
 
             $response = type_reaction::where('id', $id)->first();
 

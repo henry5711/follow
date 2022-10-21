@@ -78,14 +78,8 @@ class type_reactionController extends CrudController
         return ["list"=>$response];
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatelotteryRequest  $request
-     * @param  \App\Models\lottery  $lottery
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request,$id)
+
+    public function update(Request $request ,$id)
     {
         $type = type_reaction::where('id', '=', $id)->first();
         if (!$type) {
@@ -101,7 +95,7 @@ class type_reactionController extends CrudController
             DB::beginTransaction();
 
             $type = type_reaction::findOrFail($id);
-            $this->updateTypeReaction($type, $request);
+            $this->updateTypeReaction($type,$request);
 
             $response = type_reaction::where('id', $id)->first();
 
@@ -127,7 +121,7 @@ class type_reactionController extends CrudController
     protected function updateTypeReaction($type, $request)
     {
         $type->name= $request->name ?$request->name:$type->name;
-        if($request->icon!=$type->icon){
+        if(isset($request->icon)){
             $path = Storage::putFile('public/images',$request->icon);
             $cont=env('APP_URL').Storage::url($path);
             $type->icon = $cont;

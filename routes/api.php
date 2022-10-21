@@ -60,7 +60,7 @@ Route::delete('comments/{id}', [commentsController::class,'_delete']);
 Route::get('type_reactions', [type_reactionController::class,'_index']);
 Route::get('type_reactions/{id}', [type_reactionController::class,'show']);
 Route::post('type_reactions', [type_reactionController::class,'store']);
-Route::put('type_reactions/{id}', [type_reactionController::class,'update']);
+Route::post('type_reactions/{id}', [type_reactionController::class,'update']);
 Route::delete('type_reactions/{id}', [type_reactionController::class,'destroy']);
 
 /** routes para reaction **/

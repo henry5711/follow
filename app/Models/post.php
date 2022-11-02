@@ -21,7 +21,7 @@ class post extends CrudModel
     }
 
     public function reaction(){
-        return $this->hasMany(reaction::class);
+        return $this->hasMany(reaction::class,'fk_post_id','id');
     }
 
     public function images(){

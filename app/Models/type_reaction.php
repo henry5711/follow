@@ -9,5 +9,9 @@ class type_reaction extends CrudModel
 {
     protected $guarded = ['id'];
     protected $table = 'type_reaction';
-    protected $fillable= ['name','icon'];
+    protected $fillable = ['name', 'icon'];
+    public function reaction()
+    {
+        return $this->hasMany(reactionion::class, 'fk_type_rea', 'id');
+    }
 }

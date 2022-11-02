@@ -10,7 +10,7 @@ class reaction extends CrudModel
 {
     protected $guarded = ['id'];
     protected $table = 'reaction';
-    protected $fillable = ['fk_type_rea', 'fk_post_id', 'usu_id', 'usu_name'];
+    protected $fillable = ['fk_type_rea', 'fk_post_id', 'usu_id'];
 
     public function type_reaction()
     {

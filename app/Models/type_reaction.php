@@ -12,6 +12,6 @@ class type_reaction extends CrudModel
     protected $fillable = ['name', 'icon'];
     public function reaction()
     {
-        return $this->hasMany(reactionion::class, 'fk_type_rea', 'id');
+        return $this->hasMany(reaction::class, 'fk_type_rea', 'id');
     }
 }

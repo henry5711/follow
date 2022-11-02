@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Core\CrudModel;
-use TypeReaction;
+
 
 class reaction extends CrudModel
 {
@@ -14,6 +14,6 @@ class reaction extends CrudModel
 
     public function type_reaction()
     {
-        return $this->hasOne(TypeReaction::class,'fk_type_rea');
+        return $this->hasOne(type_reaction::class,'id','fk_type_rea');
     }
 }

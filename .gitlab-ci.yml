@@ -359,3 +359,43 @@ bukewallet_deploy_job:
     - bukewallet
   only:
     - bukewallet
+
+stable_build_job:
+  stage: build
+  script:
+    - cp .env.example .env
+    - sed -i -e "s;^\s*SECRET_KEY=.*;SECRET_KEY=$SECRET_KEY;g" .env
+    - sed -i -e "s;^\s*DB_CONNECTION=.*;DB_CONNECTION=pgsql;g" .env
+    - sed -i -e "s;^\s*DB_DATABASE=.*;DB_DATABASE=stablefollow;g" .env
+    - sed -i -e "s;^\s*DB_USERNAME=.*;DB_USERNAME=stablefollow;g" .env
+    - sed -i -e "s;^\s*DB_PASSWORD=.*;DB_PASSWORD=$STABLE_DB_PASS;g" .env
+    - sed -i -e "s;^\s*DB_HOST=.*;DB_HOST=10.0.0.81;g" .env
+    - sed -i -e "s;^\s*DB_PORT=.*;DB_PORT=5432;g" .env
+    - sed -i -e "s;^\s*DEBUG=.*;DEBUG=1;g" .env
+    - echo "APP_URL=https://stablefollow.zippyttech.com" >> .env
+    - echo "#WASTE_API=https://devrubick2follow.zippyttech.com/api/" >> .env
+    - echo "USERS_API=https://stableuser.zippyttech.com" >> .env
+    - sed -i -e "s;^\s*DB_DATABASE_USER=.*;DB_DATABASE_USER=stableuser;g" .env
+    - sed -i -e "s;^\s*DB_USERNAME_READ=.*;DB_USERNAME_READ=rubick2;g" .env
+    - sed -i -e "s;^\s*DB_PASSWORD_READ=.*;DB_PASSWORD_READ=123qwe123;g" .env
+    - docker build -t stablefollow-api .
+  when: on_success
+  tags:
+    - stable
+  only :
+    - stable
+
+stable_deploy_job:
+  stage: deploy
+  script:
+    - docker stop stablefollow-api || true
+    - docker rm stablefollow-api || true
+    - docker run -d --restart always --name stablefollow-api --network stable -p 9028:80 -v stablefollow-api-images:/var/www/html/storage/app/public/images -v stablefollow-api-images:/var/www/html/public/images -v stablefollow-api-images:/var/www/html/public/logos stablefollow-api
+    - docker exec stablefollow-api php artisan migrate
+    - docker exec stablefollow-api php artisan storage:link
+    - docker exec stablefollow-api sed -i -e '/^post_max_size/s/^.*$/post_max_size = 2000M/' /etc/php7/php.ini && docker exec stablefollow-api sed -i -e '/^upload_max_filesize/s/^.*$/upload_max_filesize = 2000M/' /etc/php7/php.ini
+  when: on_success
+  tags:
+    - stable
+  only:
+    - stable

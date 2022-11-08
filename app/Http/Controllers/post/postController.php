@@ -5,6 +5,7 @@ namespace App\Http\Controllers\post;
 use Illuminate\Http\Request;
 use App\Core\CrudController;
 use App\Models\post;
+use App\Models\reaction;
 use App\Models\seguidores;
 use App\Models\User;
 use App\Services\post\postService;
@@ -26,6 +27,8 @@ class postController extends CrudController
             $key->name_user=User::where('id',$key->user_id)->value('full_name');
             $key->photo_url=User::where('id',$key->user_id)->value('photo_url');
             $key->nickname=User::where('id',$key->user_id)->value('nick_name_user');
+            $key->total_reactions=reaction::where('fk_post_id',$key->id)->count();
+
         }
         return ["list"=>$postus];
     }
@@ -50,6 +53,8 @@ class postController extends CrudController
         $key->name_user=User::where('id',$key->user_id)->value('full_name');
         $key->photo_url=User::where('id',$key->user_id)->value('photo_url');
         $key->nickname=User::where('id',$key->user_id)->value('nick_name_user');
+        $key->total_reactions=reaction::where('fk_post_id',$key->id)->count();
+
         }
 
         return $pos;

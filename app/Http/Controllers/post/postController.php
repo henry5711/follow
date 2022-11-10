@@ -28,7 +28,8 @@ class postController extends CrudController
             $key->photo_url=User::where('id',$key->user_id)->value('photo_url');
             $key->nickname=User::where('id',$key->user_id)->value('nick_name_user');
             $key->total_reactions=reaction::where('fk_post_id',$key->id)->count();
-            $reaction = reaction::where('fk_post_id', $key->id)->where('user_id',$request->user)->count();
+            $reaction = reaction::where('fk_post_id', $key->id)
+            ->where('usu_id',$request->user)->count();
             if ($reaction > 0) {
                 $key->reactionUserPost = true;
             } else {

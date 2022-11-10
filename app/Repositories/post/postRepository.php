@@ -30,9 +30,11 @@ class postRepository extends CrudRepository
             $key->nickname = User::where('id', $key->user_id)->value('nick_name_user');
             $key->total_reactions = reaction::where('fk_post_id', $key->id)->count();
             $reaction = reaction::where('fk_post_id', $key->id)
-            ->where('usu_id',$request->user)->count();
-            if ($reaction > 0) {
+            ->where('usu_id',$request->user)->get();
+            if (count($reaction) > 0) {
                 $key->reactionUserPost = true;
+                $key->reactionUser=$reaction;
+
             } else {
                 $key->reactionUserPost = false;
             }

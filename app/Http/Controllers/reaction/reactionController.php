@@ -7,6 +7,9 @@ use App\Core\CrudController;
 use App\Models\reaction;
 use App\Models\User;
 use App\Services\reaction\reactionService;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
+
 /** @property reactionService $service */
 class reactionController extends CrudController
 {
@@ -24,5 +27,43 @@ class reactionController extends CrudController
              $key->nickname=User::where('id',$key->user_id)->value('nick_name_user');
            }
         return ["list"=>$post,"total"=>count($post)];
+    }
+
+    public function store(Request $request){
+        try {
+            DB::beginTransaction();
+
+            $id =  $this->createReaction($request);
+
+            $response = reaction::where('id', $id)->with('type_reaction')->first();
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'data' => [
+                    'code'   => $e->getCode(),
+                    'title'  => [__('Erron al guardar reaccion')],
+                    'errors' => $e->getMessage(),
+                ]
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+        return response()->json(array(
+            'success' => true,
+            'message' => 'reaccion creada',
+            'value'   => $response,
+        ));
+    }
+
+    protected function createReaction($request)
+    {
+        $reaction = new reaction();
+        $reaction->fk_type_rea= $request->fk_type_rea;
+        $reaction->fk_post_id = $request->fk_post_id;
+        $reaction->usu_id = $request->usu_id;
+        $reaction->save();
+
+        return $reaction->id;
     }
 }

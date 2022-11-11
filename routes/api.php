@@ -68,7 +68,7 @@ Route::delete('type_reactions/{id}', [type_reactionController::class,'destroy'])
 Route::get('reactions', [reactionController::class,'_index']);
 Route::get('reactions/{id}', [reactionController::class,'_show']);
 Route::get('reactions/post/{id}', [reactionController::class,'reacpost']);
-Route::post('reactions', [reactionController::class,'_store']);
+Route::post('reactions', [reactionController::class,'store']);
 Route::put('reactions/{id}', [reactionController::class,'_update']);
 Route::delete('reactions/{id}', [reactionController::class,'_delete']);
 

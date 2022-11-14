@@ -34,7 +34,7 @@ class postRepository extends CrudRepository
             $reaction = reaction::where('fk_post_id', $key->id)
             ->where('usu_id',$request->user)->with('type_reaction')->get();
             $comments = comments::where('fk_post_id', $key->id)
-            ->where('usu_id',$request->user)->get();
+            ->where('user_id',$request->user)->get();
 
             if (count($reaction) > 0) {
                 $key->reactionUserPost = true;

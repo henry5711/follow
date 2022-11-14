@@ -17,7 +17,7 @@ class post extends CrudModel
     }
 
     public function comments(){
-        return $this->hasMany(comments::class);
+        return $this->hasMany(comments::class,'fk_post_id','id');
     }
 
     public function reaction(){

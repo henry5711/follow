@@ -28,4 +28,8 @@ class post extends CrudModel
         return $this->hasMany(images::class,'id_post');
     }
 
+    public function commentsLimit(){
+        return $this->hasMany(comments::class,'fk_post_id','id')->orderBy('id','desc')->limit(5);
+    }
+
 }

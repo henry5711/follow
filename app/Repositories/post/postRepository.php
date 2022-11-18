@@ -24,7 +24,7 @@ class postRepository extends CrudRepository
 
     public function _index($request = null, $user = null)
     {
-        $post = post::with(['images', 'reaction.type_reaction','commentsLimit'])->orderBy('id', 'desc')->paginate($request->pag);
+        $post = post::with(['images', 'reaction.type_reaction', 'commentsLimit'])->orderBy('id', 'desc')->paginate($request->pag);
         foreach ($post as $key) {
             $key->name_user = User::where('id', $key->user_id)->value('full_name');
             $key->photo_url = User::where('id', $key->user_id)->value('photo_url');
@@ -32,25 +32,32 @@ class postRepository extends CrudRepository
             $key->total_reactions = reaction::where('fk_post_id', $key->id)->count();
             $key->total_comments = comments::where('fk_post_id', $key->id)->count();
             $reaction = reaction::where('fk_post_id', $key->id)
-            ->where('usu_id',$request->user)->with('type_reaction')->get();
+                ->where('usu_id', $request->user)->with('type_reaction')->get();
             $comments = comments::where('fk_post_id', $key->id)
-            ->where('user_id',$request->user)->get();
+                ->where('user_id', $request->user)->get();
 
             if (count($reaction) > 0) {
                 $key->reactionUserPost = true;
-                $key->reactionUser=$reaction;
-
+                $key->reactionUser = $reaction;
             } else {
                 $key->reactionUserPost = false;
             }
 
             if (count($comments) > 0) {
                 $key->commentsUserPost = true;
-                $key->commentsUser=$comments;
-
+                $key->commentsUser = $comments;
             } else {
                 $key->commentsUserPost = false;
             }
+
+            if(count($key->commentsLimit)>0){
+              foreach ($key->commentsLimit as $comment) {
+                $key['name_user'] = User::where('id', $key->user_id)->value('full_name');
+                $key['photo_url'] = User::where('id', $key->user_id)->value('photo_url');
+                $key['nickname ']= User::where('id', $key->user_id)->value('nick_name_user');
+              }
+            }
+
         }
         return ["list" => $post];
     }

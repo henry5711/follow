@@ -46,15 +46,17 @@ class postRepository extends CrudRepository
             if (count($comments) > 0) {
                 $key->commentsUserPost = true;
                 $key->commentsUser = $comments;
+                $key->nicknameUser= User::where('id', $request->user)->value('nick_name_user');
+                $key->photoUser = User::where('id', $request->user)->value('photo_url');
             } else {
                 $key->commentsUserPost = false;
             }
 
             if(count($key->commentsLimit)>0){
               foreach ($key->commentsLimit as $comment) {
-                $key['name_user'] = User::where('id', $key->user_id)->value('full_name');
-                $key['photo_url'] = User::where('id', $key->user_id)->value('photo_url');
-                $key['nickname ']= User::where('id', $key->user_id)->value('nick_name_user');
+                $comment['name_user'] = User::where('id', $comment->user_id)->value('full_name');
+                $$comment['photo_url'] = User::where('id', $comment->user_id)->value('photo_url');
+                $comment['nickname ']= User::where('id', $comment->user_id)->value('nick_name_user');
               }
             }
 

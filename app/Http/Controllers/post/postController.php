@@ -32,26 +32,27 @@ class postController extends CrudController
             $key->total_comments = comments::where('fk_post_id', $key->id)->count();
             $reaction = reaction::where('fk_post_id', $key->id)
             ->where('usu_id',$request->user)->with('type_reaction')->count();
-            $comments = comments::where('fk_post_id', $key->id)
-            ->where('user_id', $request->user)->get();
+            //$comments = comments::where('fk_post_id', $key->id)
+            //->where('user_id', $request->user)->get();
             if ($reaction > 0) {
                 $key->reactionUserPost = true;
+                $key->reactionUser = $reaction;
             } else {
                 $key->reactionUserPost = false;
             }
-            if (count($comments) > 0) {
+            /*if (count($comments) > 0) {
                 $key->commentsUserPost = true;
                 $key->commentsUser = $comments;
                 $key->nicknameUser= User::where('id', $request->user)->value('nick_name_user');
                 $key->photoUser = User::where('id', $request->user)->value('photo_url');
             } else {
                 $key->commentsUserPost = false;
-            }
+            }*/
 
             if(count($key->commentsLimit)>0){
               foreach ($key->commentsLimit as $comment) {
                 $comment['name_user'] = User::where('id', $comment->user_id)->value('full_name');
-                $$comment['photo_url'] = User::where('id', $comment->user_id)->value('photo_url');
+                $comment['photo_url'] = User::where('id', $comment->user_id)->value('photo_url');
                 $comment['nickname ']= User::where('id', $comment->user_id)->value('nick_name_user');
               }
             }

@@ -31,7 +31,7 @@ class postController extends CrudController
             $key->total_reactions=reaction::where('fk_post_id',$key->id)->count();
             $key->total_comments = comments::where('fk_post_id', $key->id)->count();
             $reaction = reaction::where('fk_post_id', $key->id)
-            ->where('usu_id',$request->user)->with('type_reaction')->count();
+            ->where('usu_id',$request->user)->with('type_reaction')->get();
             //$comments = comments::where('fk_post_id', $key->id)
             //->where('user_id', $request->user)->get();
             if ($reaction > 0) {

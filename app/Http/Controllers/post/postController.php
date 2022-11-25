@@ -34,7 +34,7 @@ class postController extends CrudController
             ->where('usu_id',$request->user)->with('type_reaction')->get();
             //$comments = comments::where('fk_post_id', $key->id)
             //->where('user_id', $request->user)->get();
-            if ($reaction > 0) {
+            if (count($reaction) > 0) {
                 $key->reactionUserPost = true;
                 $key->reactionUser = $reaction;
             } else {

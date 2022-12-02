@@ -403,7 +403,7 @@ stable_deploy_job:
 tessigo_backup_job:
   stage: backup
   script:
-    - //docker image tag tessigorubick2follow-api:latest tessigorubick2follow-api:prev || true
+    - docker image tag tessigorubick2follow-api:latest tessigorubick2follow-api:prev || true
   tags:
     - tessigo
   only :

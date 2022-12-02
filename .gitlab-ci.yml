@@ -399,3 +399,64 @@ stable_deploy_job:
     - stable
   only:
     - stable
+
+tessigo_backup_job:
+  stage: backup
+  script:
+    - //docker image tag tessigorubick2follow-api:latest tessigorubick2follow-api:prev || true
+  tags:
+    - tessigo
+  only :
+    - tessigo
+
+tessigo_build_job:
+  stage: build
+  script:
+    - cp .env.example .env
+    - sed -i -e "s;^\s*SECRET_KEY=.*;SECRET_KEY=$SECRET_KEY;g" .env
+    - sed -i -e "s;^\s*DB_CONNECTION=.*;DB_CONNECTION=pgsql;g" .env
+    - sed -i -e "s;^\s*DB_DATABASE=.*;DB_DATABASE=tessigorubick2follow;g" .env
+    - sed -i -e "s;^\s*DB_USERNAME=.*;DB_USERNAME=tessigorubick2follow;g" .env
+    - sed -i -e "s;^\s*DB_PASSWORD=.*;DB_PASSWORD=$TESSIGO_DB_PASS;g" .env
+    - sed -i -e "s;^\s*DB_HOST=.*;DB_HOST=10.0.0.3;g" .env
+    - sed -i -e "s;^\s*DB_PORT=.*;DB_PORT=5432;g" .env
+    - sed -i -e "s;^\s*DEBUG=.*;DEBUG=1;g" .env
+    - echo "APP_URL=https://tessigorubick2follow.zippyttech.com" >> .env
+    - echo "USERS_API=http://tessigorubick2user-api" >> .env
+    - sed -i -e "s;^\s*DB_DATABASE_USER=.*;DB_DATABASE_USER=tessigorubick2user;g" .env
+    - sed -i -e "s;^\s*DB_USERNAME_READ=.*;DB_USERNAME_READ=rubick2;g" .env
+    - sed -i -e "s;^\s*DB_PASSWORD_READ=.*;DB_PASSWORD_READ=123qwe123;g" .env
+    - docker build -t tessigorubick2follow-api .
+  when: on_success
+  tags:
+    - tessigo
+  only :
+    - tessigo
+
+tessigo_deploy_job:
+  stage: deploy
+  script:
+    - docker stop tessigorubick2follow-api || true
+    - docker rm tessigorubick2follow-api || true
+    - docker run -d --restart always --name tessigorubick2follow-api --network tessigo -p 9002:80 -v tessigorubick2follow-api-images:/var/www/html/storage/app/public/images -v tessigorubick2follow-api-images:/var/www/html/public/images -v tessigorubick2follow-api-images:/var/www/html/public/logos tessigorubick2follow-api
+    - docker exec tessigorubick2follow-api php artisan migrate
+    - docker exec tessigorubick2follow-api php artisan storage:link
+    - docker exec tessigorubick2follow-api sed -i -e '/^post_max_size/s/^.*$/post_max_size = 2000M/' /etc/php7/php.ini && docker exec tessigorubick2follow-api sed -i -e '/^upload_max_filesize/s/^.*$/upload_max_filesize = 2000M/' /etc/php7/php.ini
+  when: on_success
+  tags:
+    - tessigo
+  only:
+    - tessigo
+
+tessigo_rollback_job:
+  stage: rollback
+  script:
+    - docker stop tessigorubick2follow-api || true
+    - docker rm tessigorubick2follow-api || true
+    - docker image tag tessigorubick2follow-api:prev tessigorubick2follow-api:latest || true
+    - docker run -d --restart always --name tessigorubick2follow-api --network tessigo -p 9002:80 -v devrubick2follow-api-images:/var/www/html/storage/app/public/images -v tessigorubick2follow-api-images:/var/www/html/public/images -v tessigorubick2follow-api-images:/var/www/html/public/logos tessigorubick2follow-api
+  when: manual
+  tags:
+    - tessigo
+  only:
+    - tessigo

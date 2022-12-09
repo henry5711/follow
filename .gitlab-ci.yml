@@ -454,7 +454,7 @@ tessigo_rollback_job:
     - docker stop tessigorubick2follow-api || true
     - docker rm tessigorubick2follow-api || true
     - docker image tag tessigorubick2follow-api:prev tessigorubick2follow-api:latest || true
-    - docker run -d --restart always --name tessigorubick2follow-api --network tessigo -p 9002:80 -v devrubick2follow-api-images:/var/www/html/storage/app/public/images -v tessigorubick2follow-api-images:/var/www/html/public/images -v tessigorubick2follow-api-images:/var/www/html/public/logos tessigorubick2follow-api
+    - docker run -d --restart always --name tessigorubick2follow-api --network tessigo -p 9002:80 -v tessigorubick2follow-api-images:/var/www/html/storage/app/public/images -v tessigorubick2follow-api-images:/var/www/html/public/images -v tessigorubick2follow-api-images:/var/www/html/public/logos tessigorubick2follow-api
   when: manual
   tags:
     - tessigo

@@ -80,4 +80,15 @@ class seguidoresController extends CrudController
         }
 
     }
+
+    public function follow(Request $request){
+        $follow=seguidores::where('user_id',$request->user_id)->where('follow_id',$request->follow_id)->first();
+        if($follow){
+            $is_follow=true;
+        }
+        else{
+            $is_follow=false;
+        }
+
+    }
 }

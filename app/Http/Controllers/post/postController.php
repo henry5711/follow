@@ -59,7 +59,7 @@ class postController extends CrudController
 
         }
 
-        $follow=seguidores::where('user_id',$request->user_id)->where('follow',$id)->first();
+        $follow=seguidores::where('user_id',$request->user)->where('follow_id',$id)->first();
         if($follow)
         {
             $followVerifi=true;

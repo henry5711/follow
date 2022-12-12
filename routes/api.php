@@ -74,6 +74,7 @@ Route::delete('reactions/{id}', [reactionController::class,'_delete']);
 
 /** routes para seguidores **/
 
+Route::get('is_follow/follow/user', [seguidoresController::class,'follow']);
 Route::get('seguidores', [seguidoresController::class,'_index']);
 Route::get('seguidores/{id}', [seguidoresController::class,'_show']);
 Route::get('list/users/profiles', [seguidoresController::class,'listusuario']);

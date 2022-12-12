@@ -89,7 +89,8 @@ class seguidoresController extends CrudController
         else{
             $is_follow=false;
         }
+        $seguidores=seguidores::where('follow_id',$request->follow_id)->count();
 
-        return  ["is_follow"=>$is_follow];
+        return  ["is_follow"=>$is_follow,"total_follows"=>$seguidores];
     }
 }

@@ -58,7 +58,14 @@ class postController extends CrudController
             }
 
         }
-        return ["list"=>$postus];
+
+        $follow=seguidores::where(' user_id',$request->user_id)->where('follow',$id)->first();
+        if($follow)
+        {
+            $followVerifi=true;
+        }
+        else{$followVerifi=false;}
+        return ["list"=>$postus,"follow_user"=>$followVerifi];
     }
 
     public function postseguidos($id,Request $request)

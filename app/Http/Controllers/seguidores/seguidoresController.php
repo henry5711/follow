@@ -57,7 +57,7 @@ class seguidoresController extends CrudController
         foreach ($users as $user) {
            $user['seguidos']=seguidores::where('user_id',$user->id)->count();
            $user['seguidores']=seguidores::where('follow_id',$user->id)->count();
-           $follow=seguidores::where('user_id')->where('follow_id',$user->id)->first();
+           $follow=seguidores::where('user_id',$request->user)->where('follow_id',$user->id)->first();
            if($follow){
             $user['follow_user']=true;
            }

@@ -90,5 +90,7 @@ class seguidoresController extends CrudController
             $is_follow=false;
         }
 
+        return  $is_follow;
+
     }
 }

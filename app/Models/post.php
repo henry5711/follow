@@ -9,7 +9,7 @@ class post extends CrudModel
 {
     protected $guarded = ['id'];
     protected $table= 'post';
-    protected $fillable=['title','user_id','fecha','status'];
+    protected $fillable=['title','user_id','fecha','status','type'];
 
     public function user()
     {

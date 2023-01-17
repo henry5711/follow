@@ -114,7 +114,7 @@ qa_deploy_job:
     - docker run -d --restart always --name qarubick2follow-api --network qaapp -p 9099:80 -v qarubick2follow-api-images:/var/www/html/storage/app/public/images -v qarubick2follow-api-images:/var/www/html/public/images -v qarubick2follow-api-images:/var/www/html/public/logos qarubick2follow-api
     - docker exec qarubick2follow-api php artisan migrate
     - docker exec qarubick2follow-api php artisan storage:link
-    - docker exec qarubick2follow-api sed -i -e '/^post_max_size/s/^.*$/post_max_size = 2G/' /etc/php7/php.ini && docker exec qarubick2follow-api sed -i -e '/^upload_max_filesize/s/^.*$/upload_max_filesize = 2G/' /etc/php7/php.ini && docker exec qarubick2follow-api sed -i -e '/^memory_limit/s/^.*$/memory_limit = 3G/' /etc/php7/php.ini
+    - docker exec qarubick2follow-api sed -i -e '/^post_max_size/s/^.*$/post_max_size = 2G/' /etc/php7/php.ini && docker exec qarubick2follow-api sed -i -e '/^upload_max_filesize/s/^.*$/upload_max_filesize = 1G/' /etc/php7/php.ini && docker exec qarubick2follow-api sed -i -e '/^memory_limit/s/^.*$/memory_limit = 3G/' /etc/php7/php.ini
   when: on_success
   tags:
     - ifx1
@@ -441,7 +441,7 @@ stalkmee_deploy_job:
     - docker run -d --restart always --name stalkmeerubick2follow-api --network stalkmee -p 9002:80 -v stalkmeerubick2follow-api-images:/var/www/html/storage/app/public/images -v stalkmeerubick2follow-api-images:/var/www/html/public/images -v stalkmeerubick2follow-api-images:/var/www/html/public/logos stalkmeerubick2follow-api
     - docker exec stalkmeerubick2follow-api php artisan migrate
     - docker exec stalkmeerubick2follow-api php artisan storage:link
-    - docker exec stalkmeerubick2follow-api sed -i -e '/^post_max_size/s/^.*$/post_max_size = 2G/' /etc/php7/php.ini && docker exec stalkmeerubick2follow-api sed -i -e '/^upload_max_filesize/s/^.*$/upload_max_filesize = 2G/' /etc/php7/php.ini && docker exec stalkmeerubick2follow-api sed -i -e '/^memory_limit/s/^.*$/memory_limit = 2G/' /etc/php7/php.ini
+    - docker exec stalkmeerubick2follow-api sed -i -e '/^post_max_size/s/^.*$/post_max_size = 2G/' /etc/php7/php.ini && docker exec stalkmeerubick2follow-api sed -i -e '/^upload_max_filesize/s/^.*$/upload_max_filesize = 1G/' /etc/php7/php.ini && docker exec stalkmeerubick2follow-api sed -i -e '/^memory_limit/s/^.*$/memory_limit = 3G/' /etc/php7/php.ini
   when: on_success
   tags:
     - stalkmee

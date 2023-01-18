@@ -86,14 +86,12 @@ class PreviwController extends Controller
     {
 
         $client = new previw();
+        $path = Storage::putFile('public/images', $request->url_previw);
+        $cont = env('APP_URL') . Storage::url($path);
+        $request->url_previw = $cont;
 
-        if(isset($request->url_previw)){
-                $path = Storage::putFile('public/images', $request->url_previw);
-                $cont=env('APP_URL').Storage::url($path);
-                $request->url_previw=$cont;
 
-        }
-         $client->post_id=$request->post_id;
+        $client->post_id = $request->post_id;
         $client->save();
         return  $client->id;
     }
@@ -177,11 +175,11 @@ class PreviwController extends Controller
 
         $client->post_id  = $request->post_id  ? $request->post_id  :  $client->post_id;
         $client->active  = $request->active  ? $request->active  : $client->active;
-        if(isset($request->url_previw)){
+        if (isset($request->url_previw)) {
             foreach ($request->url_previw as $imagen) {
                 $path = Storage::putFile('public/images', $imagen);
-                $cont=env('APP_URL').Storage::url($path);
-                $request['url_previw']=$cont;
+                $cont = env('APP_URL') . Storage::url($path);
+                $request['url_previw'] = $cont;
             }
         }
         $client->updated_at  = Carbon::now();

@@ -88,11 +88,10 @@ class PreviwController extends Controller
         $client = new previw();
 
         if(isset($request->url_previw)){
-            foreach ($request->url_previw as $imagen) {
-                $path = Storage::putFile('public/images', $imagen);
+                $path = Storage::putFile('public/images', $request->url_previw;
                 $cont=env('APP_URL').Storage::url($path);
                 $request['url_previw']=$cont;
-            }
+
         }
          $client->post_id=$request->post_id;
         $client->save();

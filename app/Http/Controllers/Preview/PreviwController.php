@@ -90,7 +90,7 @@ class PreviwController extends Controller
         if(isset($request->url_previw)){
                 $path = Storage::putFile('public/images', $request->url_previw);
                 $cont=env('APP_URL').Storage::url($path);
-                $request['url_previw']=$cont;
+                $request->url_previw=$cont;
 
         }
          $client->post_id=$request->post_id;

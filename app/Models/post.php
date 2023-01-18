@@ -32,4 +32,8 @@ class post extends CrudModel
         return $this->hasMany(comments::class,'fk_post_id','id')->orderBy('id','desc')->limit(5);
     }
 
+    public function previw(){
+      return $this->hasOne(previw::class,'post_id','id');
+    }
+
 }

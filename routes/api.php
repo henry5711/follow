@@ -4,6 +4,7 @@ use App\Http\Controllers\post\postController;
 use App\Http\Controllers\seguidores\seguidoresController;
 use App\Http\Controllers\reaction\reactionController;
 use App\Http\Controllers\comments\commentsController;
+use App\Http\Controllers\Preview\PreviwController;
 use App\Http\Controllers\type_reaction\type_reactionController;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -85,4 +86,14 @@ Route::post('seguidores', [seguidoresController::class,'_store']);
 Route::put('seguidores/{id}', [seguidoresController::class,'_update']);
 Route::delete('seguidores/{id}', [seguidoresController::class,'_delete']);
 Route::post('unfollow/user', [seguidoresController::class,'unfollow']);
+
+
+
+/** routes para preview **/
+
+Route::get('preview', [PreviwController::class,'index']);
+Route::get('preview/{id}', [PreviwController::class,'show']);
+Route::post('preview',[PreviwController::class,'store']);
+Route::put('preview/{id}',[PreviwController::class,'update']);
+Route::delete('preview/{id}', [PreviwController::class,'destroy']);
 

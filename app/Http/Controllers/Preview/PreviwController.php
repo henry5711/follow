@@ -59,7 +59,7 @@ class PreviwController extends Controller
     {
         try {
             DB::beginTransaction();
-            $id =  $this->createPreviw($request);
+            $id =  $this->createPreview($request);
 
             $response = previw::where('id', $id)->first();
 

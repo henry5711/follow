@@ -23,7 +23,7 @@ class postController extends CrudController
 
     public function postuser($id,Request $request)
     {
-        $postus=post::where('user_id',$id)->with(['images'])->orderBy('id','desc')->paginate($request->pag);
+        $postus=post::where('user_id',$id)->with(['images','previw'])->orderBy('id','desc')->paginate($request->pag);
         foreach ($postus as $key) {
             $key->name_user=User::where('id',$key->user_id)->value('full_name');
             $key->photo_url=User::where('id',$key->user_id)->value('photo_url');
@@ -83,7 +83,7 @@ class postController extends CrudController
        $ids_usus=$cole->unique();
 
 
-       $pos=post::whereIn('user_id',$ids_usus)->orderBy('fecha')->paginate($request->pag);
+       $pos=post::whereIn('user_id',$ids_usus)->with(['images','previw'])->orderBy('fecha')->paginate($request->pag);
        foreach ($pos as $key) {
         $key->name_user=User::where('id',$key->user_id)->value('full_name');
         $key->photo_url=User::where('id',$key->user_id)->value('photo_url');

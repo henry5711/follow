@@ -46,7 +46,7 @@ class addCodePostCommand extends Command
             $this->info( 'Actualizando registros de post:'.count($users));
             $i = 1;
             foreach ($users as $user) {
-                $user->code_user =(string) Str::uuid();
+                $user->code =(string) Str::uuid();
                 $user->save();
                 $this->info( 'UPLOAD post '.count($users).'/'.$i++);
             }

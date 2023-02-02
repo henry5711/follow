@@ -36,4 +36,8 @@ class post extends CrudModel
       return $this->hasOne(previw::class,'post_id','id');
     }
 
+    public function pays(){
+        return $this->hasMany(Paymet::class,'post_id');
+    }
+
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\post\postController;
 use App\Http\Controllers\seguidores\seguidoresController;
 use App\Http\Controllers\reaction\reactionController;
 use App\Http\Controllers\comments\commentsController;
+use App\Http\Controllers\Paymet\PaymetController;
 use App\Http\Controllers\Preview\PreviwController;
 use App\Http\Controllers\type_reaction\type_reactionController;
 use Carbon\Carbon;
@@ -96,4 +97,15 @@ Route::get('preview/{id}', [PreviwController::class,'show']);
 Route::post('preview',[PreviwController::class,'store']);
 Route::put('preview/{id}',[PreviwController::class,'update']);
 Route::delete('preview/{id}', [PreviwController::class,'destroy']);
+
+
+
+/** routes para paymets **/
+
+Route::get('paymet', [PaymetController::class,'index']);
+Route::get('paymet/{id}', [PaymetController::class,'show']);
+Route::post('paymet',[PaymetController::class,'store']);
+Route::put('paymet/{id}',[PaymetController::class,'update']);
+Route::delete('paymet/{id}', [PaymetController::class,'destroy']);
+Route::get('filter/paymet/post', [PaymetController::class,'filter']);
 

@@ -14,6 +14,7 @@ use App\Repositories\post\postRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 /** @property postRepository $repository */
 class postService extends CrudService
@@ -29,9 +30,9 @@ class postService extends CrudService
 
     public function _store(Request $request)
     {
-       // dd($request->contenido);
         $request['status']='Activa';
         $request['fecha']=Carbon::now('UTC');
+        $request['code_user'] =(string) Str::uuid();
 
         $obj=$this->repository->_store($request);
 

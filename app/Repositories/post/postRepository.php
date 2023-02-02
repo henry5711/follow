@@ -9,6 +9,7 @@ namespace App\Repositories\post;
 
 use App\Core\CrudRepository;
 use App\Models\comments;
+use App\Models\Paymet;
 use App\Models\post;
 use App\Models\reaction;
 use App\Models\User;
@@ -33,6 +34,8 @@ class postRepository extends CrudRepository
             $key->total_comments = comments::where('fk_post_id', $key->id)->count();
             $reaction = reaction::where('fk_post_id', $key->id)
                 ->where('usu_id', $request->user)->with('type_reaction')->get();
+
+            $pay=Paymet::where('user_id',$user)->where('post_id',$key->id)->value('pay');
             /*$comments = comments::where('fk_post_id', $key->id)
                 ->where('user_id', $request->user)->get();*/
 

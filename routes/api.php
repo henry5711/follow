@@ -102,10 +102,10 @@ Route::delete('preview/{id}', [PreviwController::class,'destroy']);
 
 /** routes para paymets **/
 
-Route::get('paymet', [PaymetController::class,'index']);
-Route::get('paymet/{id}', [PaymetController::class,'show']);
-Route::post('paymet',[PaymetController::class,'store']);
-Route::put('paymet/{id}',[PaymetController::class,'update']);
-Route::delete('paymet/{id}', [PaymetController::class,'destroy']);
-Route::get('filter/paymet/post', [PaymetController::class,'filter']);
+Route::get('paymets', [PaymetController::class,'index']);
+Route::get('paymets/{id}', [PaymetController::class,'show']);
+Route::post('paymets',[PaymetController::class,'store']);
+Route::put('paymets/{id}',[PaymetController::class,'update']);
+Route::delete('paymets/{id}', [PaymetController::class,'destroy']);
+Route::get('filter/paymets/post', [PaymetController::class,'filter']);
 

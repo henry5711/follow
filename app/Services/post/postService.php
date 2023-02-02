@@ -32,7 +32,7 @@ class postService extends CrudService
     {
         $request['status']='Activa';
         $request['fecha']=Carbon::now('UTC');
-        $request['code_user'] =(string) Str::uuid();
+        $request['code'] =(string) Str::uuid();
 
         $obj=$this->repository->_store($request);
 

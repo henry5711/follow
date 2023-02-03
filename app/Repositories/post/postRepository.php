@@ -35,7 +35,7 @@ class postRepository extends CrudRepository
             $reaction = reaction::where('fk_post_id', $key->id)
                 ->where('usu_id', $request->user)->with('type_reaction')->get();
 
-            $key->paymet=Paymet::where('user_id',$user)->where('post_id',$key->id)->value('pay');
+            $key->paymet=Paymet::where('user_id',$request->user)->where('post_id',$key->id)->value('pay');
             /*$comments = comments::where('fk_post_id', $key->id)
                 ->where('user_id', $request->user)->get();*/
 

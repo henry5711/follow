@@ -5,6 +5,7 @@ namespace App\Http\Controllers\post;
 use Illuminate\Http\Request;
 use App\Core\CrudController;
 use App\Models\comments;
+use App\Models\Paymet;
 use App\Models\post;
 use App\Models\reaction;
 use App\Models\seguidores;
@@ -89,6 +90,8 @@ class postController extends CrudController
         $key->photo_url=User::where('id',$key->user_id)->value('photo_url');
         $key->nickname=User::where('id',$key->user_id)->value('nick_name_user');
         $key->total_reactions=reaction::where('fk_post_id',$key->id)->count();
+
+        $key->paymet=Paymet::where('user_id',$id)->where('post_id',$key->id)->value('pay');
 
         }
 

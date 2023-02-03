@@ -82,10 +82,12 @@ class PaymetController extends Controller
 
         $client = new Paymet();
         $client->post_id = $request->post_id;
-        $client->user_id = $request->post_id;
+        $client->user_id = $request->user_id;
         $client->code= $request->code;
         $client->pay= false;
         $client->save();
+
+
         return  $client->id;
     }
 

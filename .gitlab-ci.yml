@@ -29,6 +29,7 @@ dev_build_job:
     - echo "APP_URL=https://devrubick2follow.zippyttech.com" >> .env
     - echo "#WASTE_API=https://devrubick2follow.zippyttech.com/api/" >> .env
     - echo "USERS_API=https://devrubick2user.zippyttech.com" >> .env
+    - echo "PAY_API=https://devrubick2billing.zippyttech.com" >> .env
     - sed -i -e "s;^\s*DB_DATABASE_USER=.*;DB_DATABASE_BILLING=devrubick2billing;g" .env
     - sed -i -e "s;^\s*DB_DATABASE_USER=.*;DB_DATABASE_USER=devrubick2user;g" .env
     - sed -i -e "s;^\s*DB_USERNAME_READ=.*;DB_USERNAME_READ=devrubick2;g" .env
@@ -97,6 +98,7 @@ qa_build_job:
     - echo "URL_API_USER=https://qarubick2user.zippyttech.com" >> .env
     - echo "#WASTE_API=https://qarubick2waste.zippyttech.com/api/" >> .env
     - echo "USERS_API=https://qarubick2user.zippyttech.com" >> .env
+    - echo "PAY_API=https://qarubick2billing.zippyttech.com" >> .env
     - sed -i -e "s;^\s*DB_DATABASE_USER=.*;DB_DATABASE_USER=qarubick2user;g" .env
     - sed -i -e "s;^\s*DB_USERNAME_READ=.*;DB_USERNAME_READ=qarubick2user;g" .env
     - sed -i -e "s;^\s*DB_PASSWORD_READ=.*;DB_PASSWORD_READ=k6R+1I8k0uc=;g" .env
@@ -425,6 +427,7 @@ stalkmee_build_job:
     - sed -i -e "s;^\s*DEBUG=.*;DEBUG=1;g" .env
     - echo "APP_URL=https://follow.stalkmee.com" >> .env
     - echo "USERS_API=http://stalkmeerubick2user-api" >> .env
+    - echo "PAY_API=https://rubick2billing.zippyttech.com" >> .env
     - sed -i -e "s;^\s*DB_DATABASE_USER=.*;DB_DATABASE_USER=stalkmeerubick2user;g" .env
     - sed -i -e "s;^\s*DB_USERNAME_READ=.*;DB_USERNAME_READ=rubick2;g" .env
     - sed -i -e "s;^\s*DB_PASSWORD_READ=.*;DB_PASSWORD_READ=123qwe123;g" .env

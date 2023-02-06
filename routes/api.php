@@ -108,4 +108,6 @@ Route::post('paymets',[PaymetController::class,'store']);
 Route::put('paymets/{id}',[PaymetController::class,'update']);
 Route::delete('paymets/{id}', [PaymetController::class,'destroy']);
 Route::get('filter/paymets/post', [PaymetController::class,'filter']);
+Route::get('accept/paymets/post/link', [PaymetController::class,'acceptPayment']);
+Route::get('refuse/paymets/post/link', [PaymetController::class,'refusePayment']);
 

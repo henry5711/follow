@@ -244,4 +244,81 @@ class PaymetController extends Controller
             ]);
         }
     }
+
+    public function acceptPayment(Request $request)
+    {
+        $clientValide = Paymet::where('code', '=', $request->code)->first();
+        if (!$clientValide) {
+            return response()->json([
+                "errors" => [
+                    "message"       => "No existe esta publicacion",
+                ]
+            ], 422);
+        }
+        try {
+            DB::beginTransaction();
+
+            $client = Paymet::where('code', '=', $request->code)->first();
+            $client->pay=true;
+            $client->save();
+
+
+            $response =Paymet::where('code', '=', $request->code)->first();
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'data' => [
+                    'code'   => $e->getCode(),
+                    'title'  => [__('messages.pay.accept.update.internal_error')],
+                    'errors' => $e->getMessage(),
+                ]
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+        return response()->json([
+            "message"       => "pago actulizado",
+            "response"      => $response,
+        ]);
+    }
+
+
+    public function refusePayment(Request $request)
+    {
+        $clientValide = Paymet::where('code', '=', $request->code)->first();
+        if (!$clientValide) {
+            return response()->json([
+                "errors" => [
+                    "message"       => "No existe esta publicacion",
+                ]
+            ], 422);
+        }
+        try {
+            DB::beginTransaction();
+
+            $client = Paymet::where('code', '=', $request->code)->first();
+            $client->pay=false;
+            $client->save();
+
+
+            $response =Paymet::where('code', '=', $request->code)->first();
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'data' => [
+                    'code'   => $e->getCode(),
+                    'title'  => [__('messages.pay.refuse.update.internal_error')],
+                    'errors' => $e->getMessage(),
+                ]
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
+        return response()->json([
+            "message"       => "pago rechazado",
+            "response"      => $response,
+        ]);
+    }
 }

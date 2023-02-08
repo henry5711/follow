@@ -50,6 +50,7 @@ dev_deploy_job:
     - docker exec devrubick2follow-api php artisan migrate
     - docker exec devrubick2follow-api php artisan storage:link
     - docker exec devrubick2follow-api sed -i -e '/^post_max_size/s/^.*$/post_max_size = 2000M/' /etc/php7/php.ini && docker exec devrubick2follow-api sed -i -e '/^upload_max_filesize/s/^.*$/upload_max_filesize = 2000M/' /etc/php7/php.ini
+    - docker restart devrubick2follow-api
   when: on_success
   tags:
     - devapp

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Paymet;
 use App\Http\Requests\StorePaymetRequest;
 use App\Http\Requests\UpdatePaymetRequest;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -19,6 +20,11 @@ class PaymetController extends Controller
         try {
             DB::beginTransaction();
             $client = Paymet::get();
+            foreach ($client as $key) {
+                $key->name_user=User::where('id',$key->user_id)->value('full_name');
+                $key->photo_url=User::where('id',$key->user_id)->value('photo_url');
+                $key->nickname=User::where('id',$key->user_id)->value('nick_name_user');
+            }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();

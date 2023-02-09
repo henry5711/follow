@@ -109,6 +109,11 @@ class PaymetController extends Controller
             DB::beginTransaction();
 
             $client = Paymet::where('id', $id)->get();
+            foreach ($client as $key) {
+                $key->name_user=User::where('id',$key->user_id)->value('full_name');
+                $key->photo_url=User::where('id',$key->user_id)->value('photo_url');
+                $key->nickname=User::where('id',$key->user_id)->value('nick_name_user');
+            }
 
             DB::commit();
         } catch (\Exception $e) {
@@ -225,6 +230,11 @@ class PaymetController extends Controller
         try {
             DB::beginTransaction();
             $client = Paymet::filtro($request)->get();
+            foreach ($client as $key) {
+                $key->name_user=User::where('id',$key->user_id)->value('full_name');
+                $key->photo_url=User::where('id',$key->user_id)->value('photo_url');
+                $key->nickname=User::where('id',$key->user_id)->value('nick_name_user');
+            }
 
             DB::commit();
         } catch (\Exception $e) {
